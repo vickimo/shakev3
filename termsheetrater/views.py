@@ -4,6 +4,7 @@ from django.template import RequestContext
 from termsheetrater.models import TermFields, TermChoices
 from django.http import HttpResponseRedirect
 from django.db import connection
+import pdfquery
 
 def upload(request):
 	connection._rollback()
