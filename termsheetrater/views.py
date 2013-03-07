@@ -71,7 +71,7 @@ def upload(request):
 		return render_to_response('upload.html', { 'form': form }, context_instance = RequestContext(request))
 
 def reset_tables(request):
-	connection._rollback()
+	#connection._rollback()
 	term_deets = {
 		"price": {}, 
 		"liq pref, seniority": {"senior":3, "pari passu":4, "junior":5}, 
@@ -149,7 +149,7 @@ def generate_score(term_dict):
 
 
 def index(request):
-	connection._rollback()
+	#connection._rollback()
 	term_score = 0
 	if request.POST:
 		term_dict = {}
