@@ -32,6 +32,7 @@ def upload(request):
 	term_score = 0
 	choices = {}
 	result = 'false'
+	form = SimpleFileForm()
 	if request.POST:
 		if 'file' in request.FILES:
 			f = request.FILES['file']
@@ -61,13 +62,12 @@ def upload(request):
 				with open(fp2, 'wb+') as txtf:
 					for line in f:
 						txtf.write(line)
-					result = txtf
+				result = open(fp2, 'r').read()
 
 # with txt search for terms, if found that term is good.
-			return render_to_response('upload.html', { 'result': result }, context_instance = RequestContext(request))
+			return render_to_response('upload.html', { 'form': form, 'result': result }, context_instance = RequestContext(request))
 		#return render_to_response('index.html', {'score': term_score, 'terms': TermFields.objects.all().order_by('term'), 'choices': choices}, context_instance = RequestContext(request))
 	else:
-		form = SimpleFileForm()
 		return render_to_response('upload.html', { 'form': form }, context_instance = RequestContext(request))
 
 def reset_tables(request):
