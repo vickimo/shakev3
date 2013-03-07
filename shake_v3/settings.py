@@ -1,6 +1,6 @@
 # Django settings for shake_v3 project.
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
