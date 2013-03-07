@@ -12,7 +12,7 @@ def upload(request):
 	if request.POST:
 		if 'file' in request.FILES:
 			f = request.FILES['file']
-			filepath = 'shake_v3/' + str(f)
+			filepath = 'termsheetrater/data/' + str(f)
 			with open(filepath, 'wb+') as destination:
 				for chunk in f.chunks():
 					destination.write(chunk)
