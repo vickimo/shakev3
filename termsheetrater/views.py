@@ -41,8 +41,10 @@ def upload(request):
 				with open(fp, 'wb+') as pdff:
 					for chunk in f.chunks():
 						pdff.write(chunk)
+				pdftxt = convert_pdf(fp)
 				with open(fp2, 'wb+') as txtf:
-					txtf.write(convert_pdf(fp))
+					txtf.write(pdftxt)
+				result = pdftxt
 			elif fp[len(fp)-3:len(fp)] == 'rtf':
 				with open(fp, 'wb+') as rtff:
 					for line in f:
@@ -52,13 +54,14 @@ def upload(request):
 				with open(fp2, 'wb+') as txtf:
 					for line in doctxt:
 						txtf.write(line)
-				result = str(doctxt.find('FUNKYY'))
+				result = doctxt
+				#result = str(doctxt.find('FUNKYY')) #GOOOOOD, NOW EXPAND TO ALL THE TERMS!
 				#result = 'rtf'
 			else:
 				with open(fp2, 'wb+') as txtf:
 					for line in f:
 						txtf.write(line)
-				result = 'txt'
+					result = txtf
 
 # with txt search for terms, if found that term is good.
 			return render_to_response('upload.html', { 'result': result }, context_instance = RequestContext(request))
