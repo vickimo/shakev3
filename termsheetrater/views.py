@@ -3,24 +3,65 @@ from termsheetrater.forms import TermForm, SimpleFileForm
 from django.template import RequestContext
 from termsheetrater.models import TermFields, TermChoices
 from django.http import HttpResponseRedirect
-from django.db import connection
-import pdfquery
+from pdfminer.pdfinterp import PDFResourceManager, process_pdf
+from pdfminer.converter import TextConverter
+from pdfminer.layout import LAParams
+from cStringIO import StringIO
+from pyth.plugins.rtf15.reader import Rtf15Reader
+from pyth.plugins.plaintext.writer import PlaintextWriter
+
+def convert_pdf(path):
+
+    rsrcmgr = PDFResourceManager()
+    retstr = StringIO()
+    codec = 'utf-8'
+    laparams = LAParams()
+    device = TextConverter(rsrcmgr, retstr, codec=codec, laparams=laparams)
+
+    fp = file(path, 'rb')
+    process_pdf(rsrcmgr, device, fp)
+    fp.close()
+    device.close()
+
+    str = retstr.getvalue()
+    retstr.close()
+    return str
 
 def upload(request):
-	connection._rollback()
+	#connection._rollback()
 	term_score = 0
 	choices = {}
+	result = 'false'
 	if request.POST:
 		if 'file' in request.FILES:
 			f = request.FILES['file']
-			filepath = 'termsheetrater/data/' + str(f)
-			with open(filepath, 'wb+') as destination:
-				for chunk in f.chunks():
-					destination.write(chunk)
-			pdf = pdfquery.PDFQuery(filepath)
-# check type, if pdf, convert to txt, if docx convert to txt
+			fp = 'termsheetrater/data/' + str(f)
+			fp2 = fp[:len(fp)-3] + 'txt'
+			if fp[len(fp)-3:len(fp)] == 'pdf':
+				with open(fp, 'wb+') as pdff:
+					for chunk in f.chunks():
+						pdff.write(chunk)
+				with open(fp2, 'wb+') as txtf:
+					txtf.write(convert_pdf(fp))
+			elif fp[len(fp)-3:len(fp)] == 'rtf':
+				with open(fp, 'wb+') as rtff:
+					for line in f:
+						rtff.write(line)
+				doc = Rtf15Reader.read(open(fp, 'rb'))
+				doctxt = PlaintextWriter.write(doc).getvalue()
+				with open(fp2, 'wb+') as txtf:
+					for line in doctxt:
+						txtf.write(line)
+				result = str(doctxt.find('FUNKYY'))
+				#result = 'rtf'
+			else:
+				with open(fp2, 'wb+') as txtf:
+					for line in f:
+						txtf.write(line)
+				result = 'txt'
+
 # with txt search for terms, if found that term is good.
-			return http.HttpResponseRedirect(' upload_success.html')
+			return render_to_response('upload.html', { 'result': result }, context_instance = RequestContext(request))
 		#return render_to_response('index.html', {'score': term_score, 'terms': TermFields.objects.all().order_by('term'), 'choices': choices}, context_instance = RequestContext(request))
 	else:
 		form = SimpleFileForm()
