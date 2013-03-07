@@ -12,11 +12,11 @@ def upload(request):
 	if request.POST:
 		if 'file' in request.FILES:
 			f = request.FILES['file']
-			filepath = 'data/' + str(f)
-			with open(filepath	, 'wb+') as destination:
+			filepath = 'shake_v3/' + str(f)
+			with open(filepath, 'wb+') as destination:
 				for chunk in f.chunks():
 					destination.write(chunk)
-			doc = PdfFileReader(file(filepath, "rb"))
+			pdf = pdfquery.PDFQuery(filepath)
 # check type, if pdf, convert to txt, if docx convert to txt
 # with txt search for terms, if found that term is good.
 			return http.HttpResponseRedirect(' upload_success.html')
