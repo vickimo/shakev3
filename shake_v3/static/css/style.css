@@ -1,0 +1,10 @@
+@font-face {
+font-family: 'Comfortaa Regular';
+src: url('../fonts/Comfortaa/Comfortaa_Regular.ttf') format("truetype");
+}
+head {
+  font-family: 'Comfortaa Regular';
+}
+body {
+  font-family: 'Comfortaa Regular';
+} 

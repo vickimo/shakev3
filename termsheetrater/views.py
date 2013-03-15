@@ -9,6 +9,7 @@ from pdfminer.layout import LAParams
 from cStringIO import StringIO
 from pyth.plugins.rtf15.reader import Rtf15Reader
 from pyth.plugins.plaintext.writer import PlaintextWriter
+from django.views.decorators.csrf import csrf_exempt
 
 def convert_pdf(path):
 
@@ -27,13 +28,13 @@ def convert_pdf(path):
     retstr.close()
     return str
 
+@csrf_exempt
 def upload(request):
 	#connection._rollback()
 	term_score = 0
 	choices = {}
-	result = 'false'
-	form = SimpleFileForm()
-	if request.POST:
+	result = ''
+	if request.FILES:
 		if 'file' in request.FILES:
 			f = request.FILES['file']
 			fp = 'termsheetrater/data/' + str(f)
@@ -65,10 +66,11 @@ def upload(request):
 				result = open(fp2, 'r').read()
 
 # with txt search for terms, if found that term is good.
-			return render_to_response('upload.html', { 'form': form, 'result': result }, context_instance = RequestContext(request))
+		#return HttpResponseRedirect('/termsheet/')
+		return render_to_response('upload.html', { 'result': result }, context_instance = RequestContext(request))
 		#return render_to_response('index.html', {'score': term_score, 'terms': TermFields.objects.all().order_by('term'), 'choices': choices}, context_instance = RequestContext(request))
 	else:
-		return render_to_response('upload.html', { 'form': form }, context_instance = RequestContext(request))
+		return render_to_response('upload.html', {'result': result}, context_instance = RequestContext(request))
 
 def reset_tables(request):
 	#connection._rollback()
