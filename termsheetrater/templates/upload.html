@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=620">
 <style>
 
-#holder { border: 10px dashed #ccc; width: 90%; min-height: 300px; margin: 20px auto;}
-#holder.hover { border: 10px dashed #45e9ff; }
+#holder { position:relative;border: 10px dashed #ccc; width: 90%; min-height: 300px; margin: 20px auto;}
+#holder.hover { border: 10px dashed #3ee5ed; }
 #holder img { display: block; margin: 10px auto; }
 #holder p { margin: 10px; font-size: 14px; }
 progress { width: 100%; }
@@ -22,7 +22,7 @@ progress:after { content: '%'; }
  {{ result }}
 <article>
   <div id="holder">
-    <h1 style="width:100%;text-align:center;position:relative; ">Drag and drop your term sheet here!</h1>
+    <h1 style="width:100%;text-align:center;position:absolute;top:50%;margin-top:-1em;">Drag and drop your term sheet!</h1>
   </div> 
     <h3><p id="upload"><label>Or upload manually here:<br><input type="file"></label></p></h3>  
   <p id="filereader">File API &amp; FileReader API not supported</p>
@@ -100,7 +100,7 @@ function readfiles(files) {
           if (event.lengthComputable) {
             var complete = (event.loaded / event.total * 100 | 0);
             progress.value = progress.innerHTML = complete;
-          }
+          } 
         }
       }
 
@@ -113,6 +113,7 @@ function readfiles(files) {
 
 if (tests.dnd) { 
   holder.ondragover = function () { this.className = 'hover'; return false; };
+  holder.ondragleave = function () { this.className = ''; return false; };
   holder.ondragend = function () { this.className = ''; return false; };
   holder.ondrop = function (e) {
     this.className = '';
