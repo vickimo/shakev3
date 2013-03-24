@@ -47,7 +47,6 @@ def ocr_pdf(path):
 	call([gmcall], shell=True)
 	tesscall = 'tesseract ' + jpgfp + ' ' + txtfp
 	call([tesscall], shell=True)
-	#result = image_to_string(im)
 	return txtfp + '.txt'
 
 @csrf_exempt
