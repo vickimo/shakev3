@@ -10,8 +10,10 @@ from cStringIO import StringIO
 from pyth.plugins.rtf15.reader import Rtf15Reader
 from pyth.plugins.plaintext.writer import PlaintextWriter
 from django.views.decorators.csrf import csrf_exempt
+from pytessosx.pytesser import *
+from subprocess import call
 
-def convert_pdf(path):
+def extract_pdf_text(path):
 
     rsrcmgr = PDFResourceManager()
     retstr = StringIO()
@@ -28,6 +30,14 @@ def convert_pdf(path):
     retstr.close()
     return str
 
+def ocr_pdf(path):
+	jpgfp = path[:len(path)-3] + 'jpg'
+	gmcall = "gm convert -append -type grayscale -density 300 " + path + " " + jpgfp
+	call([gmcall], shell=True)
+	im = Image.open(jpgfp)
+	result = image_to_string(im)
+	return result
+
 @csrf_exempt
 def upload(request):
 	#connection._rollback()
@@ -43,10 +53,11 @@ def upload(request):
 				with open(fp, 'wb+') as pdff:
 					for chunk in f.chunks():
 						pdff.write(chunk)
-				pdftxt = convert_pdf(fp)
+				result = extract_pdf_text(fp)
+				if len(result) < 10:
+					result = ocr_pdf(fp)
 				with open(fp2, 'wb+') as txtf:
-					txtf.write(pdftxt)
-				result = pdftxt
+					txtf.write(result)
 			elif fp[len(fp)-3:len(fp)] == 'rtf':
 				with open(fp, 'wb+') as rtff:
 					for line in f:
