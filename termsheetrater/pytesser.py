@@ -4,7 +4,7 @@ by Michael J.T. O'Kelly
 V 0.0.1, 3/10/07"""
 
 from PIL import Image
-import subprocess
+from subprocess import call
 
 import util
 import errors
@@ -17,10 +17,10 @@ cleanup_scratch_flag = True  # Temporary files cleaned up after OCR operation
 def call_tesseract(input_filename, output_filename):
 	"""Calls external tesseract.exe on input file (restrictions on types),
 	outputting output_filename+'txt'"""
-	args = [tesseract_exe_name, input_filename, output_filename]
+	args = tesseract_exe_name + " " + input_filename + " " + output_filename
 	#proc = subprocess.Popen(args)
 	#retcode = proc.wait()
-	retcode = subprocess.call(args)
+	retcode = 	call([args], shell=True) 
 	if retcode!=0:
 		errors.check_for_errors()
 
