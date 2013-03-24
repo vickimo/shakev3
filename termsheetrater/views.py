@@ -45,7 +45,7 @@ def ocr_pdf(path):
 	gmcall = "gm convert -append -type grayscale -density 300 " + path + " " + jpgfp
 	call([gmcall], shell=True)
 	im = Image.open(jpgfp)
-	#result = image_to_string(im)
+	result = image_to_string(im)
 	return 'hola'
 
 @csrf_exempt
