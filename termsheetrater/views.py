@@ -42,11 +42,13 @@ def extract_pdf_text(path):
 
 def ocr_pdf(path):
 	jpgfp = path[:len(path)-3] + 'jpg'
+	txtfp = path[:len(path)-4]
 	gmcall = "gm convert -append -type grayscale -density 300 " + path + " " + jpgfp
 	call([gmcall], shell=True)
-	im = Image.open(jpgfp)
-	result = image_to_string(im)
-	return 'hola'
+	tesscall = 'tesseract ' + jpgfp + ' ' + txtfp
+	call([tesscall], shell=True)
+	#result = image_to_string(im)
+	return txtfp + '.txt'
 
 @csrf_exempt
 def upload(request):
@@ -65,7 +67,8 @@ def upload(request):
 						pdff.write(chunk)
 				result = extract_pdf_text(fp)
 				if len(result) < 10:
-					result = ocr_pdf(fp)
+					txtfp = ocr_pdf(fp)
+					result = open(txtfp, 'rb').read()
 				with open(fp2, 'wb+') as txtf:
 					txtf.write(result)
 			elif fp[len(fp)-3:len(fp)] == 'rtf':
