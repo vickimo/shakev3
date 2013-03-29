@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response
 from termsheetrater.forms import TermForm, SimpleFileForm
 from django.template import RequestContext
 from termsheetrater.models import TermFields, TermChoices
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from pdfminer.pdfinterp import PDFResourceManager, process_pdf
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
@@ -11,7 +11,7 @@ from pyth.plugins.rtf15.reader import Rtf15Reader
 from pyth.plugins.plaintext.writer import PlaintextWriter
 from django.views.decorators.csrf import csrf_exempt
 from subprocess import call
-import os, sys, inspect
+from django.utils import simplejson
 # realpath() with make your script run, even if you symlink it :)
 # cmd_folder = os.path.realpath(os.path.abspath(os.path.split(inspect.getfile( inspect.currentframe() ))[0]))
 # if cmd_folder not in sys.path:
@@ -21,9 +21,8 @@ import os, sys, inspect
 # cmd_subfolder = os.path.realpath(os.path.abspath(os.path.join(os.path.split(inspect.getfile( inspect.currentframe() ))[0],"subfolder")))
 # if cmd_subfolder not in sys.path:
 # 	sys.path.insert(0, cmd_subfolder)
-from termsheetrater.pytesser import *
 
-def extract_pdf_text(path):
+def pdf_to_txt(path):
 
     rsrcmgr = PDFResourceManager()
     retstr = StringIO()
@@ -38,16 +37,21 @@ def extract_pdf_text(path):
 
     str = retstr.getvalue()
     retstr.close()
-    return str
+    if len(str) < 10:
+    	return ocr_image(path[:len(path)-4], '.jpg')
+    else:
+    	return str
 
-def ocr_pdf(path):
-	jpgfp = path[:len(path)-3] + 'jpg'
-	txtfp = path[:len(path)-4]
-	gmcall = "gm convert -append -type grayscale -density 300 " + path + " " + jpgfp
+def pdf_to_jpg(pdfpath,jpgpath):
+	gmcall = "gm convert -append -type grayscale -density 300 " + pdfpath + " " + jpgpath
 	call([gmcall], shell=True)
-	tesscall = 'tesseract ' + jpgfp + ' ' + txtfp
+
+def ocr_image(filename, extension):
+	imagepath = filename + extension
+	txtpath = filename + '.txt'
+	tesscall = 'tesseract ' + imagepath + ' ' + filename
 	call([tesscall], shell=True)
-	return txtfp + '.txt'
+	return open(txtpath, 'rb').read()	
 
 @csrf_exempt
 def upload(request):
@@ -61,15 +65,14 @@ def upload(request):
 			fp = 'termsheetrater/data/' + str(f)
 			fp2 = fp[:len(fp)-3] + 'txt'
 			if fp[len(fp)-3:len(fp)] == 'pdf':
+				jpgfp = fp[:len(fp)-3] + 'jpg'
+				pdf_to_jpg(fp,jpgfp)
 				with open(fp, 'wb+') as pdff:
 					for chunk in f.chunks():
 						pdff.write(chunk)
-				result = extract_pdf_text(fp)
-				if len(result) < 10:
-					txtfp = ocr_pdf(fp)
-					result = open(txtfp, 'rb').read()
+				result = pdf_to_txt(fp)
 				with open(fp2, 'wb+') as txtf:
-					txtf.write(result)
+					txtf.write(result) #this writes nothing if not pre-ocred			
 			elif fp[len(fp)-3:len(fp)] == 'rtf':
 				with open(fp, 'wb+') as rtff:
 					for line in f:
@@ -87,13 +90,40 @@ def upload(request):
 					for line in f:
 						txtf.write(line)
 				result = open(fp2, 'r').read()
-
-# with txt search for terms, if found that term is good.
-		#return HttpResponseRedirect('/termsheet/')
-		return render_to_response('upload.html', { 'result': result }, context_instance = RequestContext(request))
-		#return render_to_response('index.html', {'score': term_score, 'terms': TermFields.objects.all().order_by('term'), 'choices': choices}, context_instance = RequestContext(request))
+		response_dict = generate_term_dict(result)
+		# with txt search for terms, if found that term is good.
+		#response_dict = {"liq pref, seniority": "senior"}
+		return HttpResponse(simplejson.dumps(response_dict), mimetype='application/javascript')
+	elif request.POST:
+		score = POST_to_score(request)
+		return render_to_response('upload.html', {'score': score, 'terms': TermFields.objects.all().order_by('term'), 'choices': TermChoices.objects.all().order_by('choice_label')}, context_instance = RequestContext(request))
 	else:
-		return render_to_response('upload.html', {'result': result}, context_instance = RequestContext(request))
+		score = 0
+		return render_to_response('upload.html', {'score': score, 'terms': TermFields.objects.all().order_by('term'), 'choices': TermChoices.objects.all().order_by('choice_label')}, context_instance = RequestContext(request))
+
+def generate_term_dict(text):
+	t = text.lower()
+	termdict = {}
+	if (text.find('anti-dilution') > -1) or (text.find('antidilution') > -1) or (text.find('anti dilution') > -1):
+		if text.find('broad-based') > -1:
+			termdict['anti-dilution, base'] = 'broad'
+		if text.find('narrow-based') > -1:
+			termdict['anti-dilution, base'] = 'narrow'
+		if text.find('full-ratchet') > -1:
+			termdict['anti-dilution'] = 'rachet'
+	if text.find('pay to play') > -1:
+		termdict['pay-to-play'] = 'yes'
+	else:
+		termdict['pay-to-play'] = 'no'
+	if text.find('pari passu') > -1:
+		termdict['liq pref, seniority'] = 'pari passu'
+	elif text.find('senior to common') > -1:
+		termdict['liq pref, seniority'] = 'senior'
+		if text.find('participates in liquidation proceeds') > -1:
+			termdict['liq pref, participating'] = 'yes'
+		elif text.find('does not participate in further liquidation proceeds') > -1:
+			termdict['liq pref, participating'] = 'no'
+	return termdict
 
 def reset_tables(request):
 	#connection._rollback()
@@ -160,7 +190,7 @@ def update_term(term, choice, value, weight):
 	except:
 		return -1
 
-def generate_score(term_dict):
+def term_dict_to_score(term_dict):
 	score = 0
 	total_weight = 0
 	for k,v in term_dict.iteritems():
@@ -170,33 +200,37 @@ def generate_score(term_dict):
 		value = term_choice.value
 		score = score + weight*value
 		total_weight = total_weight + weight
-	return score/total_weight
+	return str("{0:.2f}".format(score/total_weight)) + ('/5')
 
+def POST_to_score(request):
+	term_score = 1
+	term_dict = {}
+	for k,v in request.POST.iteritems():
+		user_input = k.split("+")
+		if user_input[0] == "weight" and v:
+			term = user_input[1]
+			term_field = TermFields.objects.get(term__iexact = term)
+			term_field.weight = v
+			term_field.save()
+		if user_input[0] == "term" and v:
+			term_dict[user_input[1]] = v
+		if user_input[0] == "value" and v:
+			term = user_input[1]
+			choice = user_input[2]
+			term_field = TermFields.objects.get(term__iexact = term)
+			term_choice = TermChoices.objects.filter(term_field = term_field, choice_label__iexact = choice)[0]
+			term_choice.value = v
+			term_choice.save()
+	if len(term_dict) > 0:
+		term_score = term_dict_to_score(term_dict)
+	return term_score
 
 def index(request):
 	#connection._rollback()
 	term_score = 0
 	if request.POST:
-		term_dict = {}
-		for k,v in request.POST.iteritems():
-			user_input = k.split("+")
-			if user_input[0] == "weight" and v:
-				term = user_input[1]
-				term_field = TermFields.objects.get(term__iexact = term)
-				term_field.weight = v
-				term_field.save()
-			if user_input[0] == "term" and v:
-				term_dict[user_input[1]] = v
-			if user_input[0] == "value" and v:
-				term = user_input[1]
-				choice = user_input[2]
-				term_field = TermFields.objects.get(term__iexact = term)
-				term_choice = TermChoices.objects.filter(term_field = term_field, choice_label__iexact = choice)[0]
-				term_choice.value = v
-				term_choice.save()
-		if len(term_dict) > 0:
-			term_score = generate_score(term_dict)
-	return render_to_response('index.html', {'score': term_score, 'terms': TermFields.objects.all().order_by('term'), 'choices': TermChoices.objects.all().order_by('choice_label')}, context_instance = RequestContext(request))
+		term_score = POST_to_score(request)
+	return render_to_response('index.html', {'score': term_score, 'selected': {"liq pref, seniority": "senior"}, 'terms': TermFields.objects.all().order_by('term'), 'choices': TermChoices.objects.all().order_by('choice_label')}, context_instance = RequestContext(request))
 
 def result(request):
 	if request.method == 'POST':
