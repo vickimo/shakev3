@@ -56,13 +56,11 @@ def ocr_image(filename, extension):
 @csrf_exempt
 def upload(request):
 	#connection._rollback()
-	term_score = 0
-	choices = {}
-	result = ''
 	if request.FILES:
 		if 'file' in request.FILES:
+			result = ''
 			f = request.FILES['file']
-			fp = 'termsheetrater/data/' + str(f)
+			fp = 'shake_v3/static/data/' + str(f)
 			fp2 = fp[:len(fp)-3] + 'txt'
 			if fp[len(fp)-3:len(fp)] == 'pdf':
 				jpgfp = fp[:len(fp)-3] + 'jpg'
@@ -83,20 +81,20 @@ def upload(request):
 					for line in doctxt:
 						txtf.write(line)
 				result = doctxt
-				#result = str(doctxt.find('FUNKYY')) #GOOOOOD, NOW EXPAND TO ALL THE TERMS!
-				#result = 'rtf'
 			else:
 				with open(fp2, 'wb+') as txtf:
 					for line in f:
 						txtf.write(line)
 				result = open(fp2, 'r').read()
 		response_dict = generate_term_dict(result)
+		response_dict['fp'] = 'static/data/' + str(f)
 		# with txt search for terms, if found that term is good.
 		#response_dict = {"liq pref, seniority": "senior"}
 		return HttpResponse(simplejson.dumps(response_dict), mimetype='application/javascript')
 	elif request.POST:
-		score = POST_to_score(request)
-		return render_to_response('upload.html', {'score': score, 'terms': TermFields.objects.all().order_by('term'), 'choices': TermChoices.objects.all().order_by('choice_label')}, context_instance = RequestContext(request))
+		score = custom_POST_to_score(request)
+		return HttpResponse(score)
+		#return render_to_response('upload.html', {'score': score, 'terms': TermFields.objects.all().order_by('term'), 'choices': TermChoices.objects.all().order_by('choice_label')}, context_instance = RequestContext(request))
 	else:
 		score = 0
 		return render_to_response('upload.html', {'score': score, 'terms': TermFields.objects.all().order_by('term'), 'choices': TermChoices.objects.all().order_by('choice_label')}, context_instance = RequestContext(request))
@@ -104,13 +102,16 @@ def upload(request):
 def generate_term_dict(text):
 	t = text.lower()
 	termdict = {}
+	# pre-money price more > 60% of pre+post better
+	if (text.find('valuation of the offering') > -1) and (text.find('amount of the offering') > -1):
+		termdict['price'] = '0-0.6'
 	if (text.find('anti-dilution') > -1) or (text.find('antidilution') > -1) or (text.find('anti dilution') > -1):
 		if text.find('broad-based') > -1:
 			termdict['anti-dilution, base'] = 'broad'
 		if text.find('narrow-based') > -1:
 			termdict['anti-dilution, base'] = 'narrow'
 		if text.find('full-ratchet') > -1:
-			termdict['anti-dilution'] = 'rachet'
+			termdict['anti-dilution'] = 'ratchet'
 	if text.find('pay to play') > -1:
 		termdict['pay-to-play'] = 'yes'
 	else:
@@ -128,13 +129,16 @@ def generate_term_dict(text):
 def reset_tables(request):
 	#connection._rollback()
 	term_deets = {
-		"price": {}, 
-		"liq pref, seniority": {"senior":3, "pari passu":4, "junior":5}, 
+		"pre-money valuation": {},
+		"amount of the offering": {},
+		"price": {'0-0.6':1, '0.6-0.65':1.5, '0.65-0.7':2, '0.7-0.75':2.5, '0.75-0.8':3, '0.8-0.85':3.5, '0.85-0.9':4, '0.9-0.95':4.5, '0.95-1':5}, 
+		"liq pref, seniority": {"senior":3, "pari passu":5}, #"liq pref, seniority": {"senior":3, "pari passu":4, "junior":5}, 
+		"liq pref, amount": {"original purchase price":3,"X times the original purchase price":1},
 		"liq pref, participating": {"yes":1, "no":5}, 
-		"liq pref, multiple": {"1":5,"2":4,"3":3,"4":2,"5":1},
+		"liq pref, capped": {"yes":3, "no":1}, 
 		"pay-to-play": {"yes":4, "no":3},
 		"employee pool": {"0-5%":3, "5-15%":5, "15-20%":3, ">20%":1},
-		"anti-dilution": {"average":5, "rachet":1},
+		"anti-dilution": {"average":5, "ratchet":1},
 		"anti-dilution, base": {"narrow":1, "broad":5},
 		"board, number": {"1-2":3,"3-8":5,"9-11":3},
 		"board, election": {"investors":1, "split":3, "founders":5},
@@ -161,6 +165,7 @@ def reset_tables(request):
 		"co-sale agreement": {"yes":3, "no":5},
 		"vesting": {"5 years":1, "4 years":2, "3 years":3, "1-2 years":4, "0 years":5}
 	}
+	terms_shown = ['liq pref, seniority', 'liq pref, participating',]
 	for term, choices in term_deets.iteritems():
 		try:
 			term_field = TermFields.objects.get(term__iexact = term)
@@ -224,6 +229,67 @@ def POST_to_score(request):
 	if len(term_dict) > 0:
 		term_score = term_dict_to_score(term_dict)
 	return term_score
+
+def custom_POST_to_score(request):
+	term_score = 0.0
+	total_weight = 0.0
+	r = request.POST
+	if "pre-money valuation" in r and "amount of the offering" in r:
+		total_weight = total_weight + 1
+		pre_money = float(r["pre-money valuation"])
+		post_money = pre_money + float(r["amount of the offering"])
+		if pre_money < 0.6*post_money:
+			term_score = term_score + 1
+		elif pre_money < 0.65*post_money:
+			term_score = term_score + 1.5
+		elif pre_money < 0.7*post_money:
+			term_score = term_score + 2
+		elif pre_money < 0.75*post_money:
+			term_score = term_score + 2.5
+		elif pre_money < 0.8*post_money:
+			term_score = term_score + 3
+		elif pre_money < 0.85*post_money:
+			term_score = term_score + 3.5
+		elif pre_money < 0.9*post_money:
+			term_score = term_score + 4
+		elif pre_money < 0.95*post_money:
+			term_score = term_score + 4
+		else: #tiny
+			term_score = term_score + 5
+	if "anti-dilution" in r:
+		total_weight = total_weight + 1
+		if r["anti-dilution"] is "average":
+			if "anti-dilution, base" in r and r["anti-dilution, base"] is "narrow":
+				term_score = term_score + 3
+			elif "anti-dilution, base" in r and r["anti-dilution, base"] is "broad":
+				term_score = term_score + 5
+			else: #not defined
+				term_score = term_score + 4
+		elif r["anti-dilution"] is "ratchet":
+			term_score = term_score + 1
+	if "pay-to-play" in r:
+		total_weight = total_weight + 1
+		if r['pay-to-play'] is 'yes':
+			term_score = term_score + 4
+		else: #not pay-to-play
+			term_score = term_score + 3
+	if 'preferred directors' in r and 'common directors' in r:
+		total_weight = total_weight + 1
+		p = int(r['preferred directors'])
+		c = int(r['common directors'])
+		if p > c:
+			term_score = term_score + 1
+		elif p < c:
+			term_score = term_score + 5
+		else: #equal
+			term_score = term_score + 3
+	if 'liq pref, seniority' in r:
+		total_weight = total_weight + 1
+		if r['liq pref, seniority'] is 'senior':
+		else: #pari passu
+			term_score = term_score + 5
+
+	return term_score/total_weight
 
 def index(request):
 	#connection._rollback()

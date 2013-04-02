@@ -1,0 +1,404 @@
+Confidential
+
+Investors:
+
+•
+•
+
+TERMS OF THE PREFERRED
+
+{Company Name}
+Memorandum of Terms
+[Except with respect to the provisions entitled [“Conﬁdentiality”][ and ][“Exclusive negotiations”], which are intended to be, and are, legally binding agreements among 
+the parties hereto, this][This] Memorandum of Terms represents only the current thinking of the parties with respect to certain of the major issues relating to the proposed 
+private offering and does not constitute a legally binding agreement. This Memorandum of Terms does not constitute an offer to sell or a solicitation of an offer to buy 
+securities in any state where the offer or sale is not permitted.
+The Offering
+Issuer:
+{Company Name}, a Delaware corporation (the “Company”)
+Series A Preferred Stock (the “Series A Preferred”)
+Securities:
+[Valuation of the Company: {$_______} pre-money]
+Amount of the offering:
+[Up to {$_______}][{$_______} to {$_______}]
+Consideration:
+[Cash][Cash and cancellation of indebtedness]
+Number of securities: {_______} shares
+Price per share:
+{$_______}
+ or afﬁliated entities, and other investors acceptable to the Company.
+See  Exhibit  A  for  the  pre-ﬁnancing  capitalization  of  the  Company[  and  the  pro  forma  capitalization 
+[Capitalization:
+following the proposed offering].]
+[Capitalization changes:
+{Specify any capitalization changes to occur before or in conjunction with the closing}]
+Anticipated closing date:
+[Initial  closing  on][On]  or  before  {date}[,  with  one  or more  additional  closings  within  {_______} 
+days thereafter].
+[Milestone payments: The purchase price will be payable as follows:
+At the initial closing, the investors will pay an aggregate of {$_______} (the “Initial Amount”).
+Upon completion of the performance milestones set forth in Exhibit B, the investors [will][may in their discretion] invest additional amounts (the “Commitment”) 
+as set forth in Exhibit B.
+If,  in  the  sole  and  absolute  judgment  of  the  investors,  a  performance  milestone  has  not  been  satisﬁed,  then  the  investors 
+may  either  (i)   waive  the  failure  and  pay  the  amount,  or  a  portion  thereof,  set  forth  opposite  such  milestone  on  Exhibit  B,  such 
+payment  to  be  conditioned  upon  the  receipt  by  the  investors  of  a  written  commitment  by  the  Company  to  use  its  best  efforts  to 
+complete the applicable milestone by a speciﬁed date and to satisfy such other conditions as the investors may require, (ii) elect not 
+to make  such milestone payment but  reserve  the  right  to make  subsequent milestone payments, or  (iii)   terminate  the Commitment 
+without any further obligation or liability on the part of the investors.]
+Dividends:
+Dividend rate: {_______}%
+Cumulation: [Cumulative][Noncumulative]
+Priority: [Senior to common][Pari passu with common].
+[Participation:  [After  preferential  dividends,  Series A  Preferred  does  not  participate  in  further  dividends][After  preferential 
+dividends, Series  A  Preferred participates  in dividends on  the common][Common may not  receive any dividends unless Series  A 
+Preferred  receives  a  dividend  (including  the  preference  amount)  equal  to  the  amount  it  would  have  received  if  converted  to 
+common].]
+[Cumulative dividends and conversion: Accumulated dividends [not ]payable on conversion.]
+Liquidation  preference:
+[Pari  passu  with  common  (no  liquidation  preference).][Amount:  [Original  purchase  price  plus  accrued  dividends][{_______}  times  the 
+original purchase price plus accrued dividends][{describe liquidation preference amount}].]
+[Priority: [Senior to common].
+
+Participation: After payment of preferential liquidation proceeds, [the Series A Preferred does not participate in further liquidation 
+proceeds.][[the  Series   A  Preferred  participates  in  liquidation  proceeds  to  the  common][common  gets  {$_______},  then  the 
+Series A Preferred participates pro rata in additional liquidation proceeds to the common][{describe the participation feature of the 
+liquidation preference}].]
+[Limit on participation: [Cap on participation at {_______} times the initial liquidation preference][No cap on participation].]
+Deemed  liquidation: A  sale of  all or  substantially  all of  the Company’s  assets  or  a merger or  consolidation of  the Company with 
+any other company will be treated as a liquidation of  the Company. [A deemed liquidation may be waived upon  the election of  the 
+holders of {specify vote threshold} of the outstanding shares of preferred stock.]]
+Redemption:
+[The Series A Preferred will not have redemption rights.][Outstanding shares of Series A Preferred will be [redeemed][redeemable at the election of [any 
+holder][holders  of  {_______%}  of  the  outstanding  Series   A  Preferred][the  Company]][  on  {specify  date}][  in  {specify  number}  equal  {specify  time  period} 
+installments commencing [{specify  time period}  from  the date of purchase][ {specify  start  time}]][ {describe  redemption schedule}]. The  redemption price will be  [the 
+purchase  price  plus  declared[  and  accrued]  dividends  from  the  closing  date][the  purchase  price  plus  declared[  and  accrued]  dividends,  plus  a  {_______}%  per  annum 
+return  [(compounded  {specify  compounding  period})]  from  the  closing  date][{describe  redemption  price}].  [If  the  Series   A  Preferred  is  not  redeemed  on  the  date  or 
+dates  set  for  redemption,  the  redemption  price will  increase  to  [the  purchase  price  plus  declared[  and  accrued]  dividends  plus  {_______}%  per  annum  [(compounded 
+{specify compounding period})] from [the closing date][the date originally set for redemption][{specify compounding start date}]][{describe penalty price for failure to 
+redeem on a timely basis}].]]
+Conversion: The Series A Preferred may be converted at any time, at the option of the holder, into shares of common stock. The conversion rate will initially be {___}:
+1, subject to anti-dilution and other customary adjustments.
+Automatic conversion:
+Each share of  [Series  A  Preferred][preferred  stock] will automatically convert  into common  stock,  at  the  then applicable conversion  rate, 
+upon (i)  the closing of a ﬁrmly underwritten public offering of common stock[[ at a price per share that is at least {$_______}][ with gross offering proceeds in excess 
+of  {$_______}]]  (a  “Qualiﬁed  Public  Offering”),  or  (ii)   the  consent  of  the  holders  of  {specify  consent  threshold}  of  the  then  outstanding  shares  of  the  [Series   A  
+Preferred][preferred stock].
+Anti-dilution: Adjustments.  The  conversion  price  of  the  Series   A  Preferred  will  be  subject  to  adjustment,  on  a  [full-ratchet][narrow-based  weighted-average][broad-
+based weighted-average] basis[ ([based on outstanding common and preferred only][based on outstanding preferred only][based on {describe basis for calculation}])], if 
+the Company issues additional securities at a price per share less than the then applicable conversion price.
+
+Exceptions. There will be no adjustment to the conversion price for:
+[shares issued upon conversion of the Series
+ A Preferred][;][; and ]
+•
+[shares or options, warrants or other rights  issued  to employees, consultants or directors  in accordance with plans, agreements or  similar arrangements[, but not 
+•
+to exceed a total of {_______} shares issued after the closing date[ or such greater number as[ unanimously] approved by the board]]][;][; and ]
+[shares issued upon exercise of options, warrants or convertible securities][;][; and ]
+•
+[shares  issued  as  a  dividend  or  distribution  on  the  preferred  stock  or  for  which  adjustment  is  otherwise made  pursuant  to  the  certiﬁcate  of  incorporation  (e.g., 
+•
+stock splits)][;][; and ]
+[shares issued in connection with a [registered public offering][Qualiﬁed Public Offering]][;][; and ]
+•
+[shares  issued  or  issuable  pursuant  to  an  acquisition  of  another  corporation  or  a  joint  venture  agreement  approved  by  the  board[  ({describe  any  special  board 
+•
+approval requirements})]][;][; and ]
+[shares  issued  or  issuable  to  banks,  equipment  lessors  or  other  ﬁnancial  institutions  pursuant  to  debt  ﬁnancing  or  commercial  transactions  approved  by  the 
+•
+board[ ({describe any special board approval requirements})]][;][; and ]
+[shares issued or issuable in connection with any settlement approved by the board[ ({describe any special board approval requirements})]][;][; and ]
+•
+[shares issued or issuable in connection with sponsored research, collaboration, technology license, development, OEM, marketing or other similar arrangements 
+•
+or strategic partnerships approved by the board[ ({describe any special board approval requirements})]][;][; and ]
+[shares issued to suppliers of goods or services in connection with the provision of goods or services pursuant to transactions approved by the board[ ({describe 
+•
+any special board approval requirements})]][;][; and ]
+[shares issued pursuant to [other ]transactions approved by the board[ ({describe any special board approval requirements})]][; and ]
+•
+shares that are otherwise excluded by consent of holders of {specify consent threshold} of the Series
+ A Preferred.
+•
+[“Pay-to-play” requirement: If a holder of preferred stock fails to participate in [this ﬁnancing][this ﬁnancing or any future Qualiﬁed Financing (as deﬁned below)][any 
+future Qualiﬁed Financing (as deﬁned below)] on a pro  rata basis,  then such holder [[will  lose  its anti-dilution protection for  the ﬁnancing on all preferred stock  that it 
+owns][will  lose  its  anti-dilution protection  for  the ﬁnancing  and  all  subsequent  ﬁnancings  on  all preferred  stock  that  it owns][will  have  all preferred  stock  that  it owns 
+converted to common stock]][ and ][will lose [all of its contractual investor rights][its [registration rights][, ][ and ][information rights][, ][ and ][right of ﬁrst refusal on 
+company issuances][, ][ and ][right of ﬁrst refusal on issuances by other stockholders][, ][ and ][co-sale rights][, ][ and ][voting rights][ and ][{explain consequences of 
+failure  to  participate}]]].  [If  such  holder  participates  in  [the][any  such]  ﬁnancing  but  not  to  the  full  extent  of  its  pro  rata  share,  then  the  preceding  will  apply 
+proportionally to the extent of the failure to participate.]
+A  “Qualiﬁed  Financing”  is  that  portion  of  any  ﬁnancing  by  the  Company[  with  a  purchase  price  less  than  [the  applicable  conversion  price  of  the  Series   A 
+[
+Preferred][{describe}]]  that  the  board  [({describe  any  special  board  approval  requirements})]  determines  in  good  faith  must  be  purchased  pro  rata  among  the 
+stockholders of the Company subject to the “pay-to-play” provisions. [Such determination will be made regardless of whether the price is higher or lower than any series 
+of preferred stock.]]]
+General voting rights:
+[Each share of preferred stock will have the right to a number of votes equal to the number of shares 
+of  common  stock  issuable  upon  conversion  of  each  such  share  of  preferred  stock.  ][Each  share  of  preferred  stock  will  have  the 
+right  to  a  number  of  votes  equal  to  {describe}.  ]The  preferred  stock  will  vote  with  the  common  stock  on  all  matters  except  as 
+speciﬁcally provided in the certiﬁcate of incorporation or as otherwise required by law.
+Voting for directors: [[So long as at least {_______} shares of Series A Preferred are outstanding, the][The] holders of Series A 
+Preferred  will  be  entitled  to  elect  {_______}  director[s].  ][The  holders  of  common  stock  will  be  entitled  to  elect  {_______} 
+director[s].  ][Any  additional  directors][Directors]  will  be  elected  by  the  holders  of  preferred  stock  and  common  stock  voting 
+together.
+Protective provisions: [So long as there are at least {_______} shares of Series A Preferred outstanding, consent][Consent] of the holders of at least {_______}% of the 
+Series A Preferred will be required to:
+•
+[alter any provision  of  the certiﬁcate of  incorporation or  the bylaws  if  it would  adversely  alter  the  rights,  preferences, privileges or  powers  of  or 
+restrictions  on  the  preferred  stock  or  any  series  of  preferred][alter  any  provision  of  the  certiﬁcate of  incorporation  if  it would  adversely  alter  the 
+rights, preferences, privileges or powers of or restrictions on  the preferred stock or any series of preferred][alter any provision of  the bylaws  if it 
+would adversely alter the rights, preferences, privileges or powers of or restrictions on the preferred stock or any series of preferred][;][; or]
+[increase or decrease the authorized number of shares of preferred stock or any series of preferred][;][; or]
+[authorize  or  create  (by  reclassiﬁcation  or  otherwise)  any  new  class  or  series  of  shares  having  rights,  preferences  or  privileges  with  respect  to 
+dividends or liquidation senior to or on a parity with the Series A Preferred or having voting rights other than those granted to the preferred stock 
+generally][authorize  or  create  (by  reclassiﬁcation  or  otherwise)  any  new  class  or  series  of  shares  having  rights,  preferences  or  privileges  with 
+respect  to  dividends  or  liquidation  senior  to  the  Series   A  Preferred  or  having  voting  rights  other  than  those  granted  to  the  preferred  stock 
+generally][authorize  or  create  (by  reclassiﬁcation  or  otherwise)  any  new  class  or  series  of  shares  having  rights,  preferences  or  privileges  with 
+respect  to  dividends  or  liquidation  senior  to  or  on  a  parity  with  the  Series   A  Preferred  or  having  voting  rights  other  than  those  granted  to  the 
+preferred stock generally][;][; or][.]
+[approve any transaction or series of transactions deemed to be a liquidation of the company][;][; or][.]
+•
+[approve any merger, sale of assets or other corporate reorganization or acquisition][;][; or][.]
+•
+[approve the voluntary liquidation or dissolution of the Company][;][; or][.]
+•
+[increase the size of the board][;][; or][.]
+•
+[encumber or grant a security interest in all or substantially all of  the assets of  the Company in connection with an indebtedness of  the Company]
+•
+[;][; or][.]
+[acquire a material amount of assets  through a merger or purchase of all or substantially all of  the assets or capital stock of another entity][;][; or]
+•
+[.]
+[declare  or  pay  any  dividend  or  distribution  or  approve  any  repurchase  with  respect  to  the  preferred  stock  (except  as  otherwise  provided  in  the 
+•
+certiﬁcate of incorporation) or the common stock (subject to customary exceptions)][; or][.]
+[increase the number of shares authorized for issuance under any existing stock or option plan or create any new stock or option plan][.]
+•
+[
+Approval is similarly required to:]
+INVESTOR RIGHTS
+[Registration rights: Registrable securities. The common stock issued or issuable upon conversion of the preferred stock will be 
+“Registrable Securities.”
+Demand  registration.  Subject  to  customary  exceptions,  holders  of  at  least  {_______}%  of  the Registrable Securities will 
+be entitled to demand  that the Company effect[ up  to] {_______}  [ﬁrmly underwritten]  registration[s][  (provided  that[ each] such 
+registration [has an offering price of at least {$_______} per share][ and ][has aggregate proceeds of at least {$_______}])] at any 
+time  following  the  earlier of  (i)   {_______}  year[s]  following  the  closing  of  the ﬁnancing  and  (ii)   {_______}  days  following  the 
+
+•
+•
+
+Company’s  initial public offering. The Company will have  the right  to delay such  registration under certain circumstances  for[ up 
+to] {_______} period[s] of up to {_______} days[ each] in any twelve month period.
+“Piggyback”  registration.  The  holders  of  Registrable  Securities will  be  entitled  to  “piggyback”  registration  rights  on  any 
+registered offering by  the Company on  its own behalf or on behalf of selling stockholders, subject to customary exceptions. In an 
+underwritten  offering,  the managing underwriters will  have  the  right,  in  the  event of marketing  limitations,  to  limit  the number  of 
+Registrable  Securities  included  in  the  offering[,  provided  that,  in  an  offering  other  than  the  initial  public  offering,  the Registrable 
+Securities may not be limited to less than {_______}% of the total offering]. In the event of such marketing limitations, each holder 
+of Registrable Securities will have the right to include shares on a pro rata basis as among all such holders and to include shares in 
+preference to any other holders of common stock. 
+S-3  rights.  Subject  to  customary  exceptions,  holders  of  Registrable  Securities  will  be  entitled  to  demand  registrations  on 
+Form S-3 (if available to the Company) so  long as the offering is for common stock having an aggregate offering price of not less 
+than {$_______}. The Company will not be required to ﬁ le more than {_______} such Form  S-3  registration statement[s] in any 
+twelve  month  period.  The  Company  may  defer  an  S3  ﬁling  {_______}  time[s]  during  any  twelve  month  period  for  up  to 
+{_______} days.
+Expenses.  Subject  to  customary  exceptions,  the  Company  will  bear  the  registration  expenses  (exclusive  of  underwriting 
+discounts and commissions) of all demand, piggyback and S-3 registrations, provided that the Company will not be required to pay 
+the fees of more than one counsel to all holders of Registrable Securities.
+Termination. The registration rights of a holder of Registrable Securities will terminate on the earlier of (i) such date, on or 
+after the Company’s initial public offering, on which such holder may immediately sell all shares of its Registrable Securities under 
+Rule 144 during any three-month period and (ii) {_______} year[s] after the initial public offering.
+Transfer.  Registration  rights  may  be  transferred  by  a  holder  of  Registrable  Securities  to  current  and  former  partners  and 
+members,  and  afﬁliates  of  that  holder  and  to  other  persons  acquiring  at  least  {_______}  shares  of  the  Company’s  outstanding 
+capital stock, provided the Company is given written notice.
+Market  stand-off.  Holders  of  Registrable  Securities  will  agree  not  to  effect  any  transactions  with  respect  to  any  of  the 
+Company’s  securities  within  {_______}  days  following  [any][the  initial]  public  offering  by  the  Company[,  provided  that  all 
+[ofﬁcers  and  directors  of  the  Company][holders  of  at  least  1%  of  the  Company’s  voting  securities][ofﬁcers  and  directors  of  the 
+Company and all holders of at least 1% of the Company’s voting securities] are similarly bound].
+Other  provisions.  The  Investor Rights Agreement will  contain  such  other  provisions with  respect  to  registration  rights  as 
+are  customary,  including  with  respect  to  indemniﬁcation,  underwriting  arrangements  and  restrictions  on  the  grant  of  future 
+registration rights.]
+[Right to maintain
+   proportionate ownership: Each  holder  of[  at  least  {_______}  shares  of]  Series   A  Preferred  will  have  a  right  to  purchase  its 
+pro  rata  share  of[  up  to  {_______}%  of]  any  offering  of  new  securities  by  the Company,  subject  to  customary  exceptions.  The 
+pro rata share will be based on the ratio of (x) the number of shares of Series A Preferred held by such holder (on an asconverted 
+basis)  to  (y)   [the  Company’s  outstanding  securities  (on  an  asconverted  and  as-exercised  basis)][the  Company’s  fully-diluted 
+capitalization (on an as-converted and as-exercised basis)][the total number of shares of Series A Preferred then outstanding]. [The 
+holders exercising this right will be required to purchase all of the new securities to be offered.] [Participating holders will have the 
+right to purchase, on a pro rata basis, any shares as to which eligible holders do not exercise their rights.] This right will terminate 
+immediately prior to [the Company’s initial public offering][a Qualiﬁed Public Offering].]
+[Right of ﬁrst refusal:
+In  the  event  proposes  to  transfer  any  common  stock[  or  other  securities  convertible  into  or 
+exercisable  for  common  stock][,  or  proposes  to  transfer  any  common  stock[  or  other  securities  convertible  into or  exercisable  for 
+common stock]], [the Company will have a right of ﬁrst refusal to purchase[ not less than all of][ any or all] the shares on the same 
+terms as  the proposed  transfer.][the holders of[  at  least {_______}  shares  of] Series  A  Preferred will have a  right of ﬁrst  refusal 
+(on  a  pro  rata  basis  based  on  [the  total  shares  of  Series  A  Preferred  then  outstanding][the Company’s  fullydiluted  capitalization 
+(on  an  as-converted  and  as-exercised  basis)][the  Company’s  outstanding  securities  (on  an  asconverted  and  as-exercised  basis)]) 
+with  respect  to  the  proposed  transfer.[  Rights  to  purchase  any  unsubscribed  shares  will  be  reallocated  pro  rata  among  the 
+participating holders of Series A Preferred.]]
+If the Company does not exercise its right of ﬁrst refusal, holders of[ at least {_______} shares of] Series A Preferred will have a right of ﬁrst refusal (on a pro 
+[
+rata basis based on  [the  total shares of Series  A  Preferred  then outstanding][the Company’s  fullydiluted capitalization (on  an as-converted and as-exercised basis)][the 
+Company’s outstanding  securities  (on  an asconverted and  as-exercised basis)]) with  respect  to  the proposed  transfer.[ Rights  to purchase  any unsubscribed  shares will 
+be reallocated pro rata among the other eligible holders of Series A Preferred.]]
+The rights of ﬁrst refusal will be subject to customary exceptions and will terminate on [a Qualiﬁed Public Offering][an initial public offering] .]
+[“Co-sale” rights:
+[To the extent the rights of ﬁrst refusal are not exercised, in][In] the event proposes to transfer any common 
+stock[  or  other  securities convertible  into or  exercisable  for  common  stock][,  or  proposes  to  transfer  any  common  stock[  or  other 
+securities  convertible  into  or  exercisable  for  common  stock]],  the  holders  of[  at  least  {_______}  shares  of]  Series   A  Preferred 
+[  and  the  founders]  will  have  the  right  to  participate  in  the  proposed  transfer  on  a  pro  rata  basis  (as  among  the  transferee[,  the 
+founders]  and  the  holders  of  Series   A  Preferred).[  Rights  to  participate  in  the  proposed  transfer  will  be  reallocated  to  the  extent 
+unexercised.]  The  co-sale  rights  will  be  subject  to  customary  exceptions  and  will  terminate  on  [a  Qualiﬁed  Public  Offering][an 
+initial public offering].]
+[“Drag-along” right: Subject  to  customary  exceptions,  if  holders  of  {specify  approval  threshold}  of  the  Series   A  Preferred 
+approve a proposed sale of  the Company  to a third party (whether structured as a merger, reorganization, asset sale or otherwise), 
+{specify persons subject to drag-along} will agree to approve the proposed sale.]
+[Voting agreement: The principal stockholders of the Company will agree to elect to the board:
+[{_______}  Series   A  designee[s][  as  the  Series   A  director[s]].[  The  [{Repeat Counter}  ]Series   A  designee will  be  chosen  by  [{_______}][investors  holding 
+{_______} of the Series A Preferred held by all investors].] The Series A designee[s] will initially be [{_______}][.]]
+[{specify  number}  common  stock  designee[s][  as  the  common  stock  director[s]].[  The  [{Repeat  Counter}  ]common  stock  designee  will  be  chosen  by 
+[{_______}][founders holding {specify approval  threshold} of  the common stock held by all founders].][  [One of  the][The] common stock designee[s] will be 
+the Company’s {_______}.] The common stock designee[s] will initially be [{_______}][.]]
+[{specify  number}  mutual  designee[s],  as  approved  by  (i)   founders  holding  {specify  approval  threshold}  of  the  common  stock  held  by  all  founders  and 
+(ii) investors holding {specify approval threshold} of the shares held by all investors. The mutual designee[s] will initially be [{_______}][.]]]
+Director liability:
+The  directors  will  be  entitled  to  customary  indemniﬁcation  from  the  Company  and  reimbursement  of 
+reasonable  costs  of  attendance  at  board  meetings.  [The  Company  will  also  obtain  D&O  insurance  reasonably  satisfactory  to  the 
+Company and its directors.]
+
+•
+•
+
+•
+
+•
+•
+•
+•
+•
+•
+
+[Management rights: The  Company  will  execute  a  management  rights  letter  under  which  will  have  a  right  to  consult  with  and 
+advise  management,  examine  the  books  and  records  of  the  Company  and  attend  all  board  meetings  in  a  non-voting  observer 
+capacity, subject to customary exceptions.]
+[Board observer rights:
+Subject  to  customary  exceptions,  will  be  entitled  to  board  observer  rights  and  will  be  entitled  to 
+participate as an observer at all board meetings and to receive copies of all materials distributed to the board.]
+Information rights: The Company will deliver to each holder of at least {_______} shares of Series A Preferred:
+[[un]audited annual ﬁnancial statements within {_______} days following year-end][;][; and][.]
+[unaudited quarterly ﬁnancial statements within {_______} days following quarter-end][;][; and][.]
+[unaudited monthly ﬁnancial statements within {_______} days of month-end][;][; and][.]
+[annual operating plans {_______} days before each ﬁscal year][; and][.]
+[unaudited monthly ﬁnancial statements showing variances from plan within {_______} days after the end of each month][.]
+[Holders of at least {_______} shares will be entitled to inspection rights. ]The information rights will terminate upon [an initial public offering][a 
+Qualiﬁed Public Offering].
+EMPLOYEE MATTERS
+[Vesting of founder shares: Shares  and  options  held  by  {specify  persons  subject  to  vesting}  will  be  subject  to  [four-year 
+vesting, with 25% vesting on  the ﬁrst anniversary of  [the commencement of  services][the  initial closing of  this ﬁnancing][{date}] 
+and  the  remainder  vesting monthly  thereafter][a  vesting  schedule  to  be mutually  agreed  upon  with  the  investors][{describe  other 
+vesting schedule}]. The Company will have the right, upon termination of services, to repurchase any unvested shares.]
+[Vesting of employee shares: [Subject  to  the  discretion  of  the  board,  shares  and  options  issued  to  employees,  directors  and 
+consultants will be subject to four-year vesting, with 25% vesting on the ﬁrst anniversary of the commencement of services and the 
+remainder  vesting monthly  thereafter.][{describe  other  vesting  schedule}]  The Company will  have  the  right,  upon  termination  of 
+services, to repurchase any unvested shares.]
+Proprietary information
+   agreements: The Company will have all employees and consultants enter into proprietary information and inventions agreements.
+[“Key person” life insurance:
+The Company will obtain a “key person”  life insurance policy on  , with proceeds payable to 
+the Company.]
+
+OTHER MATTERS
+Purchase agreement: The  investment  will  be  made  pursuant  to  a  stock  purchase  agreement  which  will  contain,  among  other  things,  appropriate  representations  and 
+warranties of the Company and the investors and appropriate conditions of closing.
+[Qualiﬁed small business:
+[The  Company  is  a  “Qualiﬁed  Small  Business”  as  deﬁned  in  Section   1202(d)  of  the  Internal 
+Revenue  Code  of  1986,  as  amended.  ][The  Company  will  covenant  to  use  commercially  reasonable  efforts  [to  comply  with  any 
+applicable  ﬁling  and  reporting  requirements][  and  ][to  cause  the  shares  to  be  purchased  by  the  investors  to  qualify  as  “Qualiﬁed 
+Small Business Stock”].]]
+Finders:
+The Company and  the  investors will each indemnify  the other for any ﬁnder’s  fees  for which  they are respectively 
+responsible.
+[Legal fees and expenses:
+The Company will pay the reasonable fees and expenses of a single counsel to the investors[, up to a 
+maximum  of  {$_______},]  if  the  ﬁnancing  closes.  [  Fees  and  expenses  payable  hereunder  will  be  payable  at  closing  by  wire 
+transfer.]]
+[Exclusive negotiations:
+From the date of the execution of this Memorandum of Terms until the earlier of (i) {date}, (ii) notice of termination of negotiations by the 
+lead investor(s) and (iii) the initial closing of the ﬁnancing contemplated by this Memorandum of Terms[ (the “Exclusivity Period”)], neither the Company nor any of its 
+directors, ofﬁcers,  employees or  agents will  [solicit][,  ][ or  ][participate  in negotiations or discussions][  or  ][provide non-public  information] with  respect  to  [any other 
+investment  in  the Company][,  ][  or  ][an  acquisition of  the Company][ or  ][any  similar  transaction] without  the prior[ written] consent of  the  lead  investor(s).  [The  lead 
+investor(s)  consent  to  the Company  soliciting, and participating  in negotiations and discussions with,  [and providing nonpublic  information  to,  ]{list names}.]  [During 
+the  Exclusivity  Period,  the  Company  agrees  to  promptly  notify  the  lead  investor(s)  if  it  receives  an  offer  or  proposal  with  respect  to  any  other  investment  in,  or  an 
+acquisition of, the Company.]]
+[Conﬁdentiality:
+Until  the  initial  closing  of  the  ﬁnancing  contemplated  by  this Memorandum  of  Terms,  [the  existence  and  terms  of  this Memorandum  of  Terms]
+[ and ][the fact that negotiations may be ongoing with the investors] shall not be disclosed to any third party without the consent of the Company and the lead investor(s)
+[,  except  as  may  be  (i)   reasonably  required  to  consummate  the  transactions  contemplated  hereby[  (provided  that  any  persons  receiving  the  information  agree  to  the 
+conﬁdentiality restrictions contained herein or are otherwise subject to conﬁdentiality obligations)] or (ii) required by law].]
+Conditions precedent:
+The investment will be subject to customary conditions, including but not limited to:
+•
+completion of due diligence to the satisfaction of the investors;
+negotiation and execution of deﬁnitive agreements customary in transactions of this nature;
+•
+receipt of all required authorizations, approvals and consents;
+•
+•
+delivery of customary closing certiﬁcates[ and an opinion of counsel for the Company]; and 
+•
+the absence of material adverse changes with respect to the Company.
+[The investment will also be subject to the following additional conditions:]
+[(Signature page follows)]
+
+[This  Memorandum  of  Terms  may  be  executed  in  counterparts,  which  together  will  constitute  one  document.  Facsimile  signatures  shall  have  the  same  legal  effect  as 
+original signatures. The legally binding portions of this Memorandum of Terms will be governed by {_______} law, without regard to conﬂicts-of-law principles.
+
+{Company Name} TEST
+
+S igna tu r e
+
+S igna tu re  
+
+Print name
+
+Print name
+
+Pr in t   t i t le
+
+Pr in t   t i t le
+
+Date
+
+Date]
+
+[This Memorandum of Terms reﬂects our mutual intentions as a basis for proceeding toward negotiation of deﬁnitive agreements.
+
+{Company Name} TEST
+
+S igna tu r e
+
+S igna tu re  
+
+Print name
+
+Print name
+
+Pr in t   t i t le
+
+Pr in t   t i t le
+
+Date
+
+Date]
+
+[
+
+[
+
+Capitalization]
+
+Performance Milestones
+]
+[][][][]
+
+
