@@ -234,7 +234,7 @@ def custom_POST_to_score(request):
 	term_score = 0.0
 	total_weight = 0.0
 	r = request.POST
-	if "pre-money valuation" in r and "amount of the offering" in r:
+	if len(r["pre-money valuation"]) > 0 and len(r["amount of the offering"]) > 0:
 		total_weight = total_weight + 1
 		pre_money = float(r["pre-money valuation"])
 		post_money = pre_money + float(r["amount of the offering"])
@@ -258,22 +258,22 @@ def custom_POST_to_score(request):
 			term_score = term_score + 5
 	if "anti-dilution" in r:
 		total_weight = total_weight + 1
-		if r["anti-dilution"] is "average":
-			if "anti-dilution, base" in r and r["anti-dilution, base"] is "narrow":
+		if r["anti-dilution"] == "average":
+			if "anti-dilution, base" in r and r["anti-dilution, base"] == "narrow":
 				term_score = term_score + 3
-			elif "anti-dilution, base" in r and r["anti-dilution, base"] is "broad":
+			elif "anti-dilution, base" in r and r["anti-dilution, base"] == "broad":
 				term_score = term_score + 5
 			else: #not defined
 				term_score = term_score + 4
-		elif r["anti-dilution"] is "ratchet":
+		elif r["anti-dilution"] == "ratchet":
 			term_score = term_score + 1
 	if "pay-to-play" in r:
 		total_weight = total_weight + 1
-		if r['pay-to-play'] is 'yes':
+		if r['pay-to-play'] == 'yes':
 			term_score = term_score + 4
 		else: #not pay-to-play
 			term_score = term_score + 3
-	if 'preferred directors' in r and 'common directors' in r:
+	if len(r['preferred directors']) > 0 and 'common directors' in r:
 		total_weight = total_weight + 1
 		p = int(r['preferred directors'])
 		c = int(r['common directors'])
@@ -285,10 +285,31 @@ def custom_POST_to_score(request):
 			term_score = term_score + 3
 	if 'liq pref, seniority' in r:
 		total_weight = total_weight + 1
-		if r['liq pref, seniority'] is 'senior':
+		liqscore = 0
+		if r['liq pref, seniority'] == 'senior':
+			if 'liq pref, participating' in r > 0:
+				if r['liq pref, participating'] == yes:
+					if 'liq pref, capped' in r:
+						if r['liq pref, capped'] == yes:
+							liqscore = 2
+						else: # not capped
+							liqscore = 1
+					else: # capped not chosen
+						liqscore = 1.5
+				else: # not participating
+					liqscore = 3
+			else:
+				liqscore = 3
 		else: #pari passu
-			term_score = term_score + 5
-
+			liqscore = 5
+		if 'liq pref, amount' in r and r['liq pref, amount'] != 'original purchase price':
+			if int(r['liq pref, amount multiple']) > 1 and int(r['liq pref, amount multiple']) < 2 and liqscore >= 1.5:
+				liqscore = liqscore - 1.5
+			elif int(r['liq pref, amount multiple']) >= 2 and liqscore >= 3:
+				liqscore = liqscore - 3
+		term_score = term_score + liqscore
+	if total_weight is 0.0:
+		return 0
 	return term_score/total_weight
 
 def index(request):

@@ -35,7 +35,7 @@
 
   <h3>Anti-Dilution</h3><br>
   <input type="radio" name="anti-dilution" value="average" onClick="showDiv(base);">Weighted Average
-  <input type="radio" name="anti-dilution" value="ratchet">Full Ratchet<br>
+  <input type="radio" name="anti-dilution" value="ratchet" onClick="hideDiv(base);">Full Ratchet<br>
   <div id='base' style="display:none;">
     <input type="radio" name="anti-dilution, base" value="narrow">Narrow-Based
     <input type="radio" name="anti-dilution, base" value="broad">Broad-Based<br>
@@ -51,20 +51,23 @@
 
   <h3>Liquidation Preference</h3><br>
   Priority<br>
-  <input type="radio" name="liq pref, seniority" value="pari passu">Pari Passu
+  <input type="radio" name="liq pref, seniority" value="pari passu" onClick="hideDiv(participating);hideDiv(capped);">Pari Passu
   <input type="radio" name="liq pref, seniority" value="senior" onClick="showDiv(participating);">Senior to Common<br>
-  Amount<br>
-  <input type="radio" name="liq pref, amount" value="original purchase price">Original Purchase Price
-  <input type="radio" name="liq pref, amount" value="X times the original purchase price"><input type="text" name="liq pref, amount" />times the original purchase price<br>
   <div id='participating' style="display:none;">
     Participating<br>
     <input type="radio" name="liq pref, participating" value="yes" onClick="showDiv(capped);" >Yes
-    <input type="radio" name="liq pref, participating" value="no">No<br>
+    <input type="radio" name="liq pref, participating" value="no" onClick="hideDiv(capped);">No<br>
   </div>
   <div id='capped' style="display:none;">
     Capped<br>
     <input type="radio" name="liq pref, capped" value="yes">Yes
     <input type="radio" name="liq pref, capped" value="no">No<br>
+  </div>
+  Amount<br>
+  <input type="radio" name="liq pref, amount" value="original purchase price" onClick="hideDiv(amount);">Original Purchase Price
+  <input type="radio" name="liq pref, amount" value="X times the original purchase price" onClick="showDiv(amount);">Multiple of the original purchase price<br>
+  <div id = 'amount' style="display:none;">
+    What multiple? <input type="text" name="liq pref, amount multiple" /></br>
   </div>
 
 <!--   {% for term_type in terms %}
@@ -164,6 +167,11 @@ var holder = document.getElementById('holder'),
 function showDiv(div) {
   d = eval(div)
   d.style.display = 'block';
+}
+
+function hideDiv(div) {
+  d = eval(div)
+  d.style.display = 'none';
 }
 
 function showpart1() {
