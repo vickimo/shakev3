@@ -150,8 +150,11 @@ def generate_term_dict(text):
 		a1 = text1[a:].find('directors')
 		b = text1.find(c)
 		b1 = text1[b:].find('directors')
-		termdict['preferred directors'] = text2int(text1[a+len(p):a+a1])
-		termdict['common directors'] = text2int(text1[b+len(c):b+b1])
+		try:
+			termdict['preferred directors'] = text2int(text1[a+len(p):a+a1])
+			termdict['common directors'] = text2int(text1[b+len(c):b+b1])
+		except:
+			pass
 
 	if text.find('pari passu') > -1:
 		termdict['liq pref, seniority'] = 'pari passu'
