@@ -195,6 +195,7 @@ function readfiles(files) {
         if (xhr.readyState==4 && xhr.status==200)
           {
             progress.value = progress.innerHTML = 0;
+            holder.className = '';
             var data = eval('(' + xhr.responseText + ')');
             for (var key in data) {
               if (key.localeCompare('fp') == 0) {
@@ -221,9 +222,9 @@ function readfiles(files) {
 if (tests.dnd) { 
   holder.ondragover = function () { this.className = 'hover'; return false; };
   holder.ondragleave = function () { this.className = ''; return false; };
-  holder.ondragend = function () { this.className = ''; return false; };
+  //holder.ondragend = function () { this.className = ''; return false; };
   holder.ondrop = function (e) {
-    this.className = '';
+    //this.className = '';
     e.preventDefault();
     readfiles(e.dataTransfer.files);
   }

@@ -349,13 +349,13 @@ def custom_POST_to_score(request):
 					liqscore = 3
 			else:
 				liqscore = 3
+			if 'liq pref, amount' in r and r['liq pref, amount'] != 'original purchase price' and len(r['liq pref, amount multiple']) > 0:
+				if int(r['liq pref, amount multiple']) > 1 and int(r['liq pref, amount multiple']) < 2 and liqscore >= 1.5:
+					liqscore = liqscore - 1.5
+				elif int(r['liq pref, amount multiple']) >= 2 and liqscore >= 3:
+					liqscore = liqscore - 3
 		else: #pari passu
 			liqscore = 5
-		if 'liq pref, amount' in r and r['liq pref, amount'] != 'original purchase price' and len(r['liq pref, amount multiple']) > 0:
-			if int(r['liq pref, amount multiple']) > 1 and int(r['liq pref, amount multiple']) < 2 and liqscore >= 1.5:
-				liqscore = liqscore - 1.5
-			elif int(r['liq pref, amount multiple']) >= 2 and liqscore >= 3:
-				liqscore = liqscore - 3
 		term_score = term_score + liqscore
 	if total_weight is 0.0:
 		return 0
