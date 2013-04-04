@@ -16,6 +16,7 @@
   </div></br>
   <p id="upload" ><label>Or Upload Manually Here: <br><input type="file" name = "theFile"></label></p>
 
+
   <p id="filereader">File API &amp; FileReader API not supported</p>
   <p id="formdata">XHR2's FormData is not supported</p>
   <p id="progress">XHR2's upload progress isn't supported</p></br>
@@ -51,7 +52,7 @@
   <h3>Liquidation Preference</h3><br>
 
   <input type="radio" name="liq pref, seniority" value="pari passu" onClick="hideDiv(participating);hideDiv(capped);">Pari Passu
-  <input type="radio" name="liq pref, seniority" value="senior" onClick="showDiv(participating);">Senior to Common<br><br>
+  <input type="radio" name="liq pref, seniority" value="senior" onClick="showDiv(participating);showDiv(liqamount);">Senior to Common<br><br>
   <div id='participating' style="display:none;">
 
     <input type="radio" name="liq pref, participating" value="yes" onClick="showDiv(capped);" >Participating
@@ -61,8 +62,9 @@
     <input type="radio" name="liq pref, capped" value="yes">Capped
     <input type="radio" name="liq pref, capped" value="no">Uncapped<br><br>
   </div>
+  <div id ='liqamount' style="display:none;">
   <input type="radio" name="liq pref, amount" value="original purchase price" onClick="hideDiv(amount);">Original Purchase Price
-  <input type="radio" name="liq pref, amount" value="X times the original purchase price" onClick="showDiv(amount);">Multiple of the original purchase price<br><br>
+  <input type="radio" name="liq pref, amount" value="X times the original purchase price" onClick="showDiv(amount);">Multiple of the original purchase price<br><br></div>
   <div id = 'amount' style="display:none;">
     What multiple? <input type="text" name="liq pref, amount multiple" /></br>
   </div>
@@ -181,7 +183,6 @@ function readfiles(files) {
 
     // now post a new XHR request
     if (tests.formdata) {
-      showpart1();
       var xhr = new XMLHttpRequest();
       xhr.open('POST', '/upload/');
       xhr.onload = function() {
@@ -200,10 +201,14 @@ function readfiles(files) {
                 document.getElementById('filepreview').src = "http://" + window.location.host + "/" + data[key];
               }
               else {
-                var elements = document.getElementsByName("term+" + key);
+                var elements = document.getElementsByName(key);
                 for (var i=0; i<elements.length; ++i) {
-                  if (elements[i].value.localeCompare(data[key]) == 0)
+                  if (elements[i].value.localeCompare(data[key]) == 0) {
                     elements[i].checked = true;
+                    elements[i].click();
+                  }
+                  else
+                    elements[i].value = data[key];
                 }
               }
             }
@@ -223,10 +228,6 @@ if (tests.dnd) {
     readfiles(e.dataTransfer.files);
   }
 }
-
-fileupload.querySelector('input').onchange = function () {
-  readfiles(this.files);
-};
 
 </script>
 </body>

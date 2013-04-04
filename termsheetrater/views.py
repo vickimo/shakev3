@@ -118,22 +118,41 @@ def upload(request):
 		return render_to_response('upload.html', {'score': score, 'terms': TermFields.objects.all().order_by('term'), 'choices': TermChoices.objects.all().order_by('choice_label')}, context_instance = RequestContext(request))
 
 def generate_term_dict(text):
-	t = text.lower()
+	text = text.lower()
+	text1 = text.replace(',','').replace(' ','')
 	termdict = {}
 	# pre-money price more > 60% of pre+post better
-	if (text.find('valuation of the offering') > -1) and (text.find('amount of the offering') > -1):
-		termdict['price'] = '0-0.6'
+	if (text.find('valuation of the company') > -1) and (text.find('amount of the offering') > -1):
+		a = text1.find('amountoftheoffering')
+		termdict['amount of the offering'] = filter(str.isdigit, text1[a:a+40])
+		b = text1.find('valuationofthecompany')
+		termdict['pre-money valuation'] = filter(str.isdigit, text1[b:b+40])
+
 	if (text.find('anti-dilution') > -1) or (text.find('antidilution') > -1) or (text.find('anti dilution') > -1):
 		if text.find('broad-based') > -1:
 			termdict['anti-dilution, base'] = 'broad'
-		if text.find('narrow-based') > -1:
+			termdict['anti-dilution'] = 'average'
+		elif text.find('narrow-based') > -1:
 			termdict['anti-dilution, base'] = 'narrow'
-		if text.find('full-ratchet') > -1:
+			termdict['anti-dilution'] = 'average'
+		elif text.find('full-ratchet') > -1:
 			termdict['anti-dilution'] = 'ratchet'
-	if text.find('pay to play') > -1:
+
+	if text.find('pay-to-play') > -1:
 		termdict['pay-to-play'] = 'yes'
 	else:
 		termdict['pay-to-play'] = 'no'
+
+	if text.find('voting for directors') > -1:
+		p = 'preferredwillbeentitledtoelect'
+		c = 'commonstockwillbeentitledtoelect'
+		a = text1.find(p)
+		a1 = text1[a:].find('directors')
+		b = text1.find(c)
+		b1 = text1[b:].find('directors')
+		termdict['preferred directors'] = text2int(text1[a+len(p):a+a1])
+		termdict['common directors'] = text2int(text1[b+len(c):b+b1])
+
 	if text.find('pari passu') > -1:
 		termdict['liq pref, seniority'] = 'pari passu'
 	elif text.find('senior to common') > -1:
@@ -142,6 +161,18 @@ def generate_term_dict(text):
 			termdict['liq pref, participating'] = 'yes'
 		elif text.find('does not participate in further liquidation proceeds') > -1:
 			termdict['liq pref, participating'] = 'no'
+		if text.find('cap on participation at') > -1:
+			termdict['liq pref, capped'] = 'yes'
+		elif text.find('no cap on participation') > -1:
+			termdict['liq pref, capped'] = 'no'
+	if text.find('original purchase price') > -1:
+		termdict['liq pref, amount'] = 'original purchase price'
+	elif text.find('times the original purchase price') > -1:
+		a = text.find('amount:')
+		b = text.find('times the original purchase price')
+		termdict['liq pref, amount multiple'] = text[a+8:b]
+		termdict['liq pref, amount'] = 'X times the original purchase price'
+	print termdict
 	return termdict
 
 def reset_tables(request):
@@ -288,7 +319,7 @@ def custom_POST_to_score(request):
 	if "pay-to-play" in r:
 		total_weight = total_weight + 1
 		if r['pay-to-play'] == 'yes':
-			term_score = term_score + 4
+			term_score = term_score + 5
 		else: #not pay-to-play
 			term_score = term_score + 3
 	if len(r['preferred directors']) > 0 and 'common directors' in r:
@@ -329,6 +360,36 @@ def custom_POST_to_score(request):
 	if total_weight is 0.0:
 		return 0
 	return term_score/total_weight
+
+def text2int(textnum, numwords={}):
+    if not numwords:
+      units = [
+        "zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
+        "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+        "sixteen", "seventeen", "eighteen", "nineteen",
+      ]
+
+      tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+
+      scales = ["hundred", "thousand", "million", "billion", "trillion"]
+
+      numwords["and"] = (1, 0)
+      for idx, word in enumerate(units):    numwords[word] = (1, idx)
+      for idx, word in enumerate(tens):     numwords[word] = (1, idx * 10)
+      for idx, word in enumerate(scales):   numwords[word] = (10 ** (idx * 3 or 2), 0)
+
+    current = result = 0
+    for word in textnum.split():
+        if word not in numwords:
+          raise Exception("Illegal word: " + word)
+
+        scale, increment = numwords[word]
+        current = current * scale + increment
+        if scale > 100:
+            result += current
+            current = 0
+
+    return result + current
 
 def index(request):
 	#connection._rollback()
