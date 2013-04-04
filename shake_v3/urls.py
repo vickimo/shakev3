@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'mysite.views.home', name='home'),
     # url(r'^mysite/', include('mysite.foo.urls')),
-    (r'^$', 'termsheetrater.views.index'),
+    (r'^$', 'termsheetrater.views.upload'),
     (r'^termsheet/$', 'termsheetrater.views.index'),
     (r'^result/$', 'termsheetrater.views.result'),
     (r'^reset/$', 'termsheetrater.views.reset_tables'),
