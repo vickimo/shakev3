@@ -10,11 +10,12 @@
 </head>
 <body>
 
-<div id="part1" style="display: block; opacity: 1; height: 100%; padding:1%;" onClick="showpart1();"></br></br></br></br>
+<div id="part1" class="container" style="display: block; opacity: 1; height: 100%; padding:1%;" onClick="showpart1();">
+</br></br></br></br>
   <div id="holder">
     <h1 style="width:100%;text-align:center;position:absolute;top:50%;margin-top:-1em;">Drag and drop your term sheet!</h1>
   </div></br>
-  <p id="upload" ><label>Or Upload Manually Here: <br><input type="file" name = "theFile"></label></p>
+  <p id="upload" ><label>Or Upload Manually Here:<br><input type="file" name = "theFile"></label></p>
 
 
   <p id="filereader">File API &amp; FileReader API not supported</p>
@@ -25,7 +26,7 @@
 
 
 <div id = "part2" style="display: none; height: 100%;" onClick="showpart2();">
-  <div id="left">
+  <div id="left" class="container" >
   <form id="termform" method="post">
   {% csrf_token %}
 
@@ -78,7 +79,8 @@
 </div>
 
 
-<div id = "part3" style="display:none;height: 100%" onClick="showpart3();">
+<div id = "part3" class="container" style="display:none;height: 100%" onClick="showpart3();">
+  <div id = "container">
   <h1 style="width:100%;text-align:center;position:absolute;top:250%;margin-top:-3em;">
   Term Sheet Score: <div id="score"></div></h1>
 </div>
@@ -229,6 +231,10 @@ if (tests.dnd) {
     readfiles(e.dataTransfer.files);
   }
 }
+
+fileupload.querySelector('input').onchange = function () {
+  readfiles(this.files);
+};
 
 </script>
 </body>

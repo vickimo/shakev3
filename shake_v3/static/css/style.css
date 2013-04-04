@@ -9,16 +9,20 @@ html {
     padding: 0;
 }
 head {
-  font-family: 'Gotham Rounded';
+	font-family: 'Gotham Rounded';
 }
 body {
-  font-family: 'Gotham Rounded';
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  color: #353535;
+	font-family: 'Gotham Rounded';
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	color: #353535;
 } 
+.container {
+	border-top: 5px solid #4b848d;
+}
+
 .lb-half { display:block; margin-top:-0.5em; }
 h3 {margin-bottom: 0; padding-bottom: 0;}
 #holder { position:relative;border: 10px dashed #ccc; width: 90%; min-height: 300px; margin: 20px auto;}
