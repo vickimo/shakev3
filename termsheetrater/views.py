@@ -80,6 +80,7 @@ def upload(request):
 				with open(fp2, 'wb+') as txtf:
 					for line in doctxt:
 						txtf.write(line)
+				f = str(f)[:-4] + ".txt"
 				result = doctxt
 			else:
 				with open(fp2, 'wb+') as txtf:
