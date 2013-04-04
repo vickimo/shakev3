@@ -41,13 +41,7 @@ progress#uploadprogress::-moz-progress-bar {background-color:#88d0db;}
  box-sizing: border-box;   
 }
 
-#left, #right {
-  float: left;
-  height: 100%;
-  line-height: 100%;
-  width: 50%;
-  text-align: left;
-}
+
 
 #left {
  background: #fae263;

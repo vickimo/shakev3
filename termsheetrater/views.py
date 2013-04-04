@@ -325,7 +325,7 @@ def custom_POST_to_score(request):
 			term_score = term_score + 5
 		else: #not pay-to-play
 			term_score = term_score + 3
-	if len(r['preferred directors']) > 0 and 'common directors' in r:
+	if len(r['preferred directors']) > 0 and len(r['common directors']) > 0:
 		total_weight = total_weight + 1
 		p = int(r['preferred directors'])
 		c = int(r['common directors'])
