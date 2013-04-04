@@ -1,6 +1,6 @@
 @font-face {
-font-family: 'Comfortaa Regular';
-src: url('../fonts/Comfortaa/Comfortaa_Regular.ttf') format("truetype");
+font-family: 'Gotham Rounded';
+src: url('../fonts/Gotham/gotham-rounded-book.otf') format("opentype");
 }
 html {
 	height:100%;
@@ -9,15 +9,17 @@ html {
     padding: 0;
 }
 head {
-  font-family: 'Comfortaa Regular';
+  font-family: 'Gotham Rounded';
 }
 body {
-  font-family: 'Comfortaa Regular';
+  font-family: 'Gotham Rounded';
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
+  color: #353535;
 } 
+.lb-one-and-a-half { display:block; margin-top:1.5em; }
 h3 {margin-bottom: 0; padding-bottom: 0;}
 #holder { position:relative;border: 10px dashed #ccc; width: 90%; min-height: 300px; margin: 20px auto;}
 #holder.hover { border: 10px dashed #88d0db; }
@@ -46,7 +48,7 @@ progress#uploadprogress::-moz-progress-bar {background-color:#88d0db;}
 #left {
  background: #fae263;
  border-left-color:#fae263; 
- padding: 2% 3%;
+ padding: 1% 1.5%;
  height: 100%;
 
 }

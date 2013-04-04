@@ -14,9 +14,8 @@
   <div id="holder">
     <h1 style="width:100%;text-align:center;position:absolute;top:50%;margin-top:-1em;">Drag and drop your term sheet!</h1>
   </div></br>
-    <p id="upload"><h3>Or upload manually here:</h3>
-      <em>(.pdf, .doc, .docx, .txt, and .rtf supported)</em><br>
-      <input type="file"></p>
+  <p id="upload" ><label>Or Upload Manually Here: <br><input type="file" name = "theFile"></label></p>
+
   <p id="filereader">File API &amp; FileReader API not supported</p>
   <p id="formdata">XHR2's FormData is not supported</p>
   <p id="progress">XHR2's upload progress isn't supported</p></br>
@@ -30,13 +29,13 @@
   {% csrf_token %}
 
   <h3>Price</h3><br>
-  Pre-Money Valuation <input type="text" name="pre-money valuation" /><br>
+  Pre-Money Valuation <input type="text" name="pre-money valuation" /><br><br>
   Amount of the Offering <input type="text" name="amount of the offering" /><br>
 
   <h3>Anti-Dilution</h3><br>
   <input type="radio" name="anti-dilution" value="average" onClick="showDiv(base);">Weighted Average
   <input type="radio" name="anti-dilution" value="ratchet" onClick="hideDiv(base);">Full Ratchet<br>
-  <div id='base' style="display:none;">
+  <div id='base' style="display:none;"><br>
     <input type="radio" name="anti-dilution, base" value="narrow">Narrow-Based
     <input type="radio" name="anti-dilution, base" value="broad">Broad-Based<br>
   </div>
@@ -46,62 +45,29 @@
   <input type="radio" name="pay-to-play" value="no">No<br>
 
   <h3>Board Voting</h3><br>
-  Number of Directors Elected by Preferred Stock Holders<input type="text" name="preferred directors" /><br>
+  Number of Directors Elected by Preferred Stock Holders<input type="text" name="preferred directors" /><br><br>
   Number of Directors Elected by Common Stock Holders<input type="text" name="common directors" /><br>
 
   <h3>Liquidation Preference</h3><br>
-  Priority<br>
+
   <input type="radio" name="liq pref, seniority" value="pari passu" onClick="hideDiv(participating);hideDiv(capped);">Pari Passu
-  <input type="radio" name="liq pref, seniority" value="senior" onClick="showDiv(participating);">Senior to Common<br>
+  <input type="radio" name="liq pref, seniority" value="senior" onClick="showDiv(participating);">Senior to Common<br><br>
   <div id='participating' style="display:none;">
-    Participating<br>
-    <input type="radio" name="liq pref, participating" value="yes" onClick="showDiv(capped);" >Yes
-    <input type="radio" name="liq pref, participating" value="no" onClick="hideDiv(capped);">No<br>
+
+    <input type="radio" name="liq pref, participating" value="yes" onClick="showDiv(capped);" >Participating
+    <input type="radio" name="liq pref, participating" value="no" onClick="hideDiv(capped);">Not Participating<br><br>
   </div>
   <div id='capped' style="display:none;">
-    Capped<br>
-    <input type="radio" name="liq pref, capped" value="yes">Yes
-    <input type="radio" name="liq pref, capped" value="no">No<br>
+    <input type="radio" name="liq pref, capped" value="yes">Capped
+    <input type="radio" name="liq pref, capped" value="no">Uncapped<br><br>
   </div>
-  Amount<br>
   <input type="radio" name="liq pref, amount" value="original purchase price" onClick="hideDiv(amount);">Original Purchase Price
-  <input type="radio" name="liq pref, amount" value="X times the original purchase price" onClick="showDiv(amount);">Multiple of the original purchase price<br>
+  <input type="radio" name="liq pref, amount" value="X times the original purchase price" onClick="showDiv(amount);">Multiple of the original purchase price<br><br>
   <div id = 'amount' style="display:none;">
     What multiple? <input type="text" name="liq pref, amount multiple" /></br>
   </div>
 
-<!--   {% for term_type in terms %}
-      
-      {% if term_type.term == 'price' %}
-        <b>{{term_type.term}}</b></br>
-        <input type="text" name="term+{{term_type.term}}" />{{choice_type.choice_label}}</br>
-      {% elif term_type.term == 'anti-dilution' %}
-        <b>{{term_type.term}}</b></br>
-        {% for choice_type in choices %}
-          {% if choice_type.term_field.term == term_type.term %}
-            <input type="radio" name="term+{{term_type.term}}" value="{{choice_type.choice_label}}" />{{choice_type.choice_label}}
-          {% endif %}
-        {% endfor %}</br>
-      {% elif term_type.term == 'liq pref, seniority' %}
-        <b>{{term_type.term}}</b></br>
-        {% for choice_type in choices %}
-          {% if choice_type.term_field.term == term_type.term %}
-            <input type="radio" name="term+{{term_type.term}}" value="{{choice_type.choice_label}}" />{{choice_type.choice_label}}
-          {% endif %}
-        {% endfor %}</br>
-      {% elif term_type.term == 'liq pref, amount' %}
-        <b>{{term_type.term}}</b></br>
-        {% for choice_type in choices %}
-          {% if choice_type.term_field.term == term_type.term %}
-            <input type="radio" name="term+{{term_type.term}}" value="{{choice_type.choice_label}}" />{{choice_type.choice_label}}
-          {% endif %}
-        {% endfor %}</br>
-      {% endif %}
-
-
-  {% endfor %}   -->
-
-  <input type="submit" value="Generate Score" />
+   <span class="lb-half"></span><input type="image" src="/static/css/generatescore1.png" alt="Submit Form" align="right"/>
   </form>
 </div>
 <div id="right">
@@ -111,7 +77,8 @@
 
 
 <div id = "part3" style="display:none;height: 100%" onClick="showpart3();">
-  <h1>TermSheet Score: <div id="score"></div></h1>
+  <h1 style="width:100%;text-align:center;position:absolute;top:250%;margin-top:-3em;">
+  Term Sheet Score: <div id="score"></div></h1>
 </div>
 
 
@@ -143,11 +110,6 @@ var holder = document.getElementById('holder'),
       filereader: document.getElementById('filereader'),
       formdata: document.getElementById('formdata'),
       progress: document.getElementById('progress')
-    },
-    acceptedTypes = {
-      'image/png': true,
-      'image/jpeg': true,
-      'image/gif': true
     },
     progress = document.getElementById('uploadprogress'),
     fileupload = document.getElementById('upload');

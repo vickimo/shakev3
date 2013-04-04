@@ -38,7 +38,9 @@ def pdf_to_txt(path):
     str = retstr.getvalue()
     retstr.close()
     if len(str) < 10:
-    	return ocr_image(path[:len(path)-4], '.jpg')
+		jpgfp = path[:len(path)-3] + 'jpg'
+		pdf_to_jpg(path,jpgfp)
+		return ocr_image(path[:len(path)-4], '.jpg')
     else:
     	return str
 
@@ -63,14 +65,12 @@ def upload(request):
 			fp = 'shake_v3/static/data/' + str(f)
 			fp2 = fp[:len(fp)-3] + 'txt'
 			if fp[len(fp)-3:len(fp)] == 'pdf':
-				jpgfp = fp[:len(fp)-3] + 'jpg'
-				pdf_to_jpg(fp,jpgfp)
 				with open(fp, 'wb+') as pdff:
 					for chunk in f.chunks():
 						pdff.write(chunk)
 				result = pdf_to_txt(fp)
 				with open(fp2, 'wb+') as txtf:
-					txtf.write(result) #this writes nothing if not pre-ocred			
+					txtf.write(result)			
 			elif fp[len(fp)-3:len(fp)] == 'rtf':
 				with open(fp, 'wb+') as rtff:
 					for line in f:
@@ -93,8 +93,25 @@ def upload(request):
 		#response_dict = {"liq pref, seniority": "senior"}
 		return HttpResponse(simplejson.dumps(response_dict), mimetype='application/javascript')
 	elif request.POST:
+		rating = ""
 		score = custom_POST_to_score(request)
-		return HttpResponse(score)
+		if score > 4.5:
+			rating = 'A+'
+		elif score > 4:
+			rating = 'A'
+		elif score > 3.5:
+			rating = 'B+'
+		elif score > 3:
+			rating = 'B'
+		elif score > 2.5:
+			rating = 'C+'
+		elif score > 2:
+			rating = 'C'
+		elif score > 1:
+			rating = 'D'
+		else:
+			rating = 'F'
+		return HttpResponse(rating)
 		#return render_to_response('upload.html', {'score': score, 'terms': TermFields.objects.all().order_by('term'), 'choices': TermChoices.objects.all().order_by('choice_label')}, context_instance = RequestContext(request))
 	else:
 		score = 0
@@ -289,9 +306,9 @@ def custom_POST_to_score(request):
 		liqscore = 0
 		if r['liq pref, seniority'] == 'senior':
 			if 'liq pref, participating' in r > 0:
-				if r['liq pref, participating'] == yes:
+				if r['liq pref, participating'] == 'yes':
 					if 'liq pref, capped' in r:
-						if r['liq pref, capped'] == yes:
+						if r['liq pref, capped'] == 'yes':
 							liqscore = 2
 						else: # not capped
 							liqscore = 1
@@ -303,7 +320,7 @@ def custom_POST_to_score(request):
 				liqscore = 3
 		else: #pari passu
 			liqscore = 5
-		if 'liq pref, amount' in r and r['liq pref, amount'] != 'original purchase price':
+		if 'liq pref, amount' in r and r['liq pref, amount'] != 'original purchase price' and len(r['liq pref, amount multiple']) > 0:
 			if int(r['liq pref, amount multiple']) > 1 and int(r['liq pref, amount multiple']) < 2 and liqscore >= 1.5:
 				liqscore = liqscore - 1.5
 			elif int(r['liq pref, amount multiple']) >= 2 and liqscore >= 3:
