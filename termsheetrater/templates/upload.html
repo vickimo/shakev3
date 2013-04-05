@@ -83,10 +83,11 @@
 </div>
 
 
-<div id = "part3" class="container" style="display:none;height: 100%" onClick="showpart3();">
+<div id = "part3" class="container" style="display:none;height: 100%;position:relative;" onClick="showpart3();">
   <div id = "container">
-  <h1 style="width:100%;text-align:center;position:absolute;top:250%;margin-top:-3em;">
-  Term Sheet Score: <div id="score"></div></h1>
+  <h1 style="width:100%;text-align:center;position:absolute;top:50%;margin-top:-4em;font-size:350%;">
+  Term Sheet Score: <div id="score" style="font-size:200%;"></div></h1>
+  <img src="/static/css/poweredbyshakeS.png" style="position:absolute; right:2em; bottom:1em;"/>
 </div>
 
 
@@ -191,6 +192,7 @@ function readfiles(files) {
     if (tests.formdata) {
       var xhr = new XMLHttpRequest();
       xhr.open('POST', '/upload/');
+      $("form#termform")[0].reset();
       xhr.onload = function() {
         progress.value = progress.innerHTML = 100;
       };

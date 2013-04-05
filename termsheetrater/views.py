@@ -160,14 +160,16 @@ def generate_term_dict(text):
 		termdict['liq pref, seniority'] = 'pari passu'
 	elif text.find('senior to common') > -1:
 		termdict['liq pref, seniority'] = 'senior'
-		if text.find('participates in liquidation proceeds') > -1:
+		if text1.find('participatesinliquidationproceeds') > -1:
 			termdict['liq pref, participating'] = 'yes'
-		elif text.find('does not participate in further liquidation proceeds') > -1:
+		elif text1.find('doesnotparticipateinfurtherliquidationproceeds') > -1:
 			termdict['liq pref, participating'] = 'no'
 		if text.find('cap on participation at') > -1:
 			termdict['liq pref, capped'] = 'yes'
+			termdict['liq pref, participating'] = 'yes'
 		elif text.find('no cap on participation') > -1:
 			termdict['liq pref, capped'] = 'no'
+			termdict['liq pref, participating'] = 'yes'
 	if text.find('original purchase price') > -1:
 		termdict['liq pref, amount'] = 'original purchase price'
 	elif text.find('times the original purchase price') > -1:
@@ -339,7 +341,7 @@ def custom_POST_to_score(request):
 		total_weight = total_weight + 1
 		liqscore = 0
 		if r['liq pref, seniority'] == 'senior':
-			if 'liq pref, participating' in r > 0:
+			if 'liq pref, participating' in r:
 				if r['liq pref, participating'] == 'yes':
 					if 'liq pref, capped' in r:
 						if r['liq pref, capped'] == 'yes':

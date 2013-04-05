@@ -1,6 +1,6 @@
 @font-face {
-font-family: 'Gotham';
-src: url('../fonts/Gotham/gotham.otf') format("opentype");
+font-family: 'Gotham Rounded';
+src: url('../fonts/Gotham/gotham-rounded-book.otf') format("opentype");
 }
 html {
 	height:100%;
@@ -9,10 +9,10 @@ html {
     padding: 0;
 }
 head {
-	font-family: 'Gotham';
+	font-family: 'Gotham Rounded';
 }
 body {
-	font-family: 'Gotham';
+	font-family: 'Gotham Rounded';
 	height: 100%;
 	width: 100%;
 	margin: 0;
