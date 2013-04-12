@@ -1,0 +1,215 @@
+V   I   C   T   O   R   I   A     M   O  
+	   (9 4 9 )  7 3 5   3 9 0 8   |	  v m 2 3 5 5@c o l u m b i a . e d u 	  
+
+ 
+
+ 
+
+	  
+
+	  
+
+	  
+
+	  
+
+	  
+
+	   	   	   	   	  
+
+	   	   	   	   	   	   Summer	  2011	  
+
+Winter	  2012	  
+
+	   	   	   	   	   Fall	  2006	  –	  Spring	  2010	  
+
+	   	   	   	   	   	   	   Spring	  2012	  –	  Present	  
+
+E D U C A T I O N  
+` 	  
+Columbia	  University,	  New	  York,	  NY	  	   |	  Expected	  Graduation:	  May	  2013	  	  
+	  
+	  
+	  
+• 
+Candidate	  for	  a	  Masters	  in	  Science	  in	  Computer	  Science	  –	  Machine	  Learning	  
+	   	   	   	   	   	  
+	  
+• 
+Coursework	  in	  Machine	  Learning	  (ML),	  Advanced	  ML,	  ML	  for	  Natural	  Language	  Processing,	  Distributed	  Data	  Mining,	  Operating	  
+Systems,	  Compilers	  (PLT),	  Databases,	  Computer	  Networks,	  Programming	  &	  Problem	  Solving,	  Data	  Science	  &	  Entrepreneurship	  
+Hacker	  School,	  New	  York,	  NY	  
+	   	   	   	   	   	   Summer	  2012	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	   	   	   	   	  
+• 
+Focused	  on	  web	  development,	  including	  the	  Django	  framework,	  Javascript,	  and	  network	  security	  
+• 
+Contributed	  to	  open	  source	  projects	  such	  as	  Requests	  and	  Django	  
+Stanford	  University,	  Stanford,	  CA	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+• 
+Coursework	  in	  Artificial	  Intelligence,	  Algorithms,	  and	  Programming	  Abstractions	  
+University	  of	  California,	  San	  Diego,	  La	  Jolla,	  CA	  
+	  
+	  
+	  
+	  
+	  
+•  Bachelor	  of	  Arts	  in	  Mathematics	  –	  Applied	  Science;	  Minor	  in	  Biological	  Sciences	  
+	  
+W E B   P R O J E C T S  
+` 	  
+	   	   	   	   	   	   	   Spring	  2013	  –	  Present	  
+Nursery	  Smiles,	  www.nurserysmiles.com	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+•  An	  Ipad,	  Iphone,	  and	  web	  application	  for	  nurseries	  to	  better	  record,	  manage,	  and	  share	  toddler	  data	  with	  parents.	  
+• 
+Self-­‐developing	  the	  website	  (Front-­‐end,	  UI/UX,	  Back-­‐end,	  Data	  Science)	  with	  Node.js	  and	  Cassandra	  (currently	  self-­‐learning).	  
+	   	   	   	   	   Fall	  2012	  –	  Spring	  2013	  
+Term	  Sheet	  Rater	  for	  Shake	  Legal,	  www.shakev3.herokuapp.com	  
+	  
+	  
+	  
+	  
+•  Using	  natural	  language	  processing	  techniques,	  automatically	  rate	  term	  sheets	  based	  on	  how	  they	  compare	  to	  the	  average.	  
+• 
+Self-­‐developed	  the	  website	  (Front-­‐end,	  UI/UX,	  Back-­‐end,	  Data	  Science)	  using	  Python/Django	  and	  PostgreSQL.	  
+Winter	  2013	  
+Street	  Beacon,	  www.street-­‐beacon.com	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+•  Designed	  and	  prototyped	  a	  payphone	  (Front-­‐end,	  UI/UX)	  with	  team	  InSITE	  for	  the	  NYC	  Reinvent	  Payphones	  Design	  Challenge.	  
+•  Won	  awards	  from	  Adafruit,	  Mashery,	  and	  TokBox	  at	  the	  Payphone	  Hack	  Day;	  placed	  in	  the	  top	  20	  of	  hundreds	  of	  submissions.	  
+hapStream,	  http://videos.huffingtonpost.com/entertainment/hapstream-­‐517375008	  
+	  
+	  
+	  
+	  
+Winter	  2012	  
+•  Developed	  an	  Android	  application	  (UI/UX,	  Back-­‐end)	  that	  streams	  videos	  of	  clubs	  for	  the	  Techcrunch	  Disrupt	  NY	  Hackathon.	  
+•  Won	  as	  a	  team	  the	  $10,000	  Mobli	  award	  at	  the	  hackathon.	  
+PinShop,	  https://chrome.google.com/webstore/search/pinshop	  
+	  
+	  
+	  
+• 
+Self-­‐developed	  a	  chrome	  extension	  that	  labels	  all	  purchasable	  items	  on	  Pinterest.	  
+	  
+W O R K   E X P E R I E N C E  
+ 
+ 
+` 	  
+McCann	  Investigations,	  www.einvestigations.com	  
+SEO	  Consultant	  (try	  searching	  Google	  for	  “houston	  computer	  forensics”)	  
+	   	   	   	   	   Fall	  2011	  –	  Spring	  2012	  
+	  
+	  
+	  
+•  Managed	  the	  website	  and	  the	  Google	  AdWords,	  Facebook	  Ads,	  and	  LinkedIn	  Ads	  accounts	  to	  attract	  fresh	  traffic.	  
+•  Optimized	  the	  organic	  search	  ranking	  to	  Google’s	  1st	  page	  by	  writing	  white	  papers	  and	  by	  communicating	  with	  news	  outlets.	  
+Mo	  Fund	  Management,	  Irvine,	  CA	  
+Trading	  Assistant,	  Programmer	  
+	   	   	   	   	   	   	   	   	   	   	   Summer	  2010	  –	  Fall	  2011	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+• 
+Collaborated	  daily	  with	  the	  trader	  to	  develop	  statistical	  models	  in	  R	  for	  trading	  commodity	  futures	  in	  China’s	  markets.	  
+•  Built	  the	  trader	  interface	  in	  Visual	  Basic	  and	  Microsoft	  Excel	  for	  streamlined	  accessibility	  to	  up-­‐to-­‐the-­‐minute	  data	  and	  analyses.	  
+•  Aided	  the	  trader	  in	  managing	  over	  100	  million	  RMB	  ($15.6	  million)	  and	  in	  performing	  time-­‐sensitive	  analyses	  under	  pressure.	  
+	  
+A C T I V I T I E S   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   
+                 
+` 	  
+InSITE	  Fellow	  
+	   	   	   	   	   	   Winter	  2012	  –	  Present	  
+	  
+	  
+	  
+	  
+	  
+	  
+	   	   	   	   	   	   	   	  
+	  
+	  
+•  
+InSITE	  is	  an	  entrepreneurial	  mentorship	  program	  that	  brings	  together	  top	  graduate	  students	  to	  support	  New	  York	  
+entrepreneurs	  in	  developing	  their	  businesses	  and	  in	  pursuing	  venture	  capital	  and	  angel	  investments.	  
+•  
+Shake	  Legal	  (Fall	  2012	  –	  Spring	  2013):	  Built	  the	  term	  sheet	  rater	  mentioned	  in	  web projects above.	  
+•   AOL	  Ventures	  QLabs	  (Spring	  2012):	  
+•   Consulted	  in	  the	  product	  development	  of	  When,	  a	  family	  social	  network.	  
+•   Researched	  the	  competitive	  landscape	  and	  financial	  potential	  of	  multiple	  tech	  startup	  ideas	  to	  judge	  their	  viability.	  
+Women’s	  Epee	  Fencer	  
+	   	   	   	   	   	   	   	   	   Fall	  2006	  –	  Present	  
+	  
+	  
+	  
+	  
+	  
+	  
+	   	   	   	   	   	   	   	  
+	  
+•   Placed	  2nd	  at	  the	  2011	  Division	  1A	  Summer	  Nationals	  in	  San	  Jose.	  
+•   Represented	  the	  United	  States	  of	  America	  in	  the	  Doha	  Grand	  Prix	  (Qatar,	  2011)	  and	  Leipzig	  World	  Cup	  (Germany,	  2011).	  
+•   Represented	  UC	  San	  Diego	  at	  the	  2010	  NCAA	  National	  Championships	  at	  Harvard	  University.	  
+	  
+P U B L I C A T I O N S   A N D   O T H E R   AW A R D S  
+` 	  
+	   	   	   	   •	   	   	   2011	  Women’s	  Epee	  USA	  National	  Finalist	  
+	   	   	   	   •	   	   	   2006-­‐2011	  Orange	  Coast	  Division	  Women’s	  Epee	  Champion.	  
+	   	   	   	   •	   	   	   Zhao,	  J.,	  Mo,	  V.,	  Nagasaki,	  T.	  (February	  2009)	  Distribution	  of	  Label-­‐retaining	  Cells	  in	  the	  Limbal	  Epithelium	  of	  a	  Mouse	  Eye.	  
+	   	   	   	   	   	   	   	   Journal	  of	  Histochemistry	  and	  Cytochemistry.	  
+	  
+S K I L L S   A N D   I N T E R E S T S  
+` 	  
+	   	   	   	   •	   	   	   What	  I	  feel	  comfortable	  saying	  I’m	  good	  at:	  Python,	  Web-­‐Scraping,	  UI/UX,	  Data/Machine	  Learning.	  
+	   	   	   	   •	   	   	   What	  I	  most	  enjoy	  working	  on:	  UI/UX,	  Data/Machine	  Learning	  problems.	  
+	   	   	   	   •	   	   	   Problems	  that	  most	  interest	  me:	  Hard	  people	  problems.	  Creating	  more	  opportunities	  for	  those	  without	  access	  through	  
+	   education	  and	  accessibility,	  promoting	  meaningful	  interactions	  and	  community-­‐building,	  encouraging	  physical/mental	  
+	   awareness,	  and	  simplifying	  complicated	  data	  for	  the	  public.	  Also,	  languages	  and	  machine	  translation	  fascinate	  me.	  
+	   	   	   	   •	   	   	   Familiar	  with	  C,	  C++,	  Java,	  R,	  Matlab/Octave,	  Javascript,	  CSS,	  Django,	  SQL,	  command	  line.	  
+	   	   	   	   •	   	   	   Conversational	  in	  Spanish,	  Mandarin	  Chinese,	  and	  Cantonese	  Chinese;	  basic	  proficiency	  in	  French.	  
+	   	   	   	   •	   	   	   Interests	  include	  Fencing,	  Meditation,	  Skiing,	  Tennis,	  Rock-­‐climbing,	  Traveling,	  Languages,	  and	  Yoga.	  
+
+

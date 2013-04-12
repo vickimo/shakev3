@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     (r'^result/$', 'termsheetrater.views.result'),
     (r'^reset/$', 'termsheetrater.views.reset_tables'),
     (r'^upload/$', 'termsheetrater.views.upload'),
+    (r'^demo/$', 'termsheetrater.views.demo'),
     (r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.MEDIA_ROOT}),
     (r'^static/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.STATIC_ROOT}),
    

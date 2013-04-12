@@ -56,6 +56,14 @@ def ocr_image(filename, extension):
 	return open(txtpath, 'rb').read()	
 
 @csrf_exempt
+def demo(request):
+	result = ''
+	result = open('shake_v3/static/data/GoodTermSheet.txt', 'rb+').read()
+	response_dict = generate_term_dict(result)
+	response_dict['fp'] = 'static/data/GoodTermSheet.pdf'
+	return HttpResponse(simplejson.dumps(response_dict), mimetype='application/javascript')
+
+@csrf_exempt
 def upload(request):
 	#connection._rollback()
 	if request.FILES:
