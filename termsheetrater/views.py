@@ -12,16 +12,21 @@ from pyth.plugins.plaintext.writer import PlaintextWriter
 from django.views.decorators.csrf import csrf_exempt
 from subprocess import call
 from django.utils import simplejson
-# realpath() with make your script run, even if you symlink it :)
-# cmd_folder = os.path.realpath(os.path.abspath(os.path.split(inspect.getfile( inspect.currentframe() ))[0]))
-# if cmd_folder not in sys.path:
-# 	sys.path.insert(0, cmd_folder)
 
-# # use this if you want to include modules from a subforder
-# cmd_subfolder = os.path.realpath(os.path.abspath(os.path.join(os.path.split(inspect.getfile( inspect.currentframe() ))[0],"subfolder")))
-# if cmd_subfolder not in sys.path:
-# 	sys.path.insert(0, cmd_subfolder)
+#Calls graphics magick to convert the pdf file to a jpg for OCR-ing.
+def pdf_to_jpg(pdfpath,jpgpath):
+	gmcall = "gm convert -append -type grayscale -density 300 " + pdfpath + " " + jpgpath
+	call([gmcall], shell=True)
 
+#Calls tesseract to convert the jpg to OCR-ed text.
+def ocr_image(filename, extension):
+	imagepath = filename + extension
+	txtpath = filename + '.txt'
+	tesscall = 'tesseract ' + imagepath + ' ' + filename
+	call([tesscall], shell=True)
+	return open(txtpath, 'rb').read()	
+
+#Converts a pdf file to text. Checks first for native OCR; if not, OCRs the file.
 def pdf_to_txt(path):
 
     rsrcmgr = PDFResourceManager()
@@ -44,87 +49,7 @@ def pdf_to_txt(path):
     else:
     	return str
 
-def pdf_to_jpg(pdfpath,jpgpath):
-	gmcall = "gm convert -append -type grayscale -density 300 " + pdfpath + " " + jpgpath
-	call([gmcall], shell=True)
-
-def ocr_image(filename, extension):
-	imagepath = filename + extension
-	txtpath = filename + '.txt'
-	tesscall = 'tesseract ' + imagepath + ' ' + filename
-	call([tesscall], shell=True)
-	return open(txtpath, 'rb').read()	
-
-@csrf_exempt
-def demo(request):
-	result = ''
-	result = open('shake_v3/static/data/GoodTermSheet.txt', 'rb+').read()
-	response_dict = generate_term_dict(result)
-	response_dict['fp'] = 'static/data/GoodTermSheet.pdf'
-	return HttpResponse(simplejson.dumps(response_dict), mimetype='application/javascript')
-
-@csrf_exempt
-def upload(request):
-	#connection._rollback()
-	if request.FILES:
-		if 'file' in request.FILES:
-			result = ''
-			f = request.FILES['file']
-			fp = 'shake_v3/static/data/' + str(f)
-			fp2 = fp[:len(fp)-3] + 'txt'
-			if fp[len(fp)-3:len(fp)] == 'pdf':
-				with open(fp, 'wb+') as pdff:
-					for chunk in f.chunks():
-						pdff.write(chunk)
-				result = pdf_to_txt(fp)
-				with open(fp2, 'wb+') as txtf:
-					txtf.write(result)			
-			elif fp[len(fp)-3:len(fp)] == 'rtf':
-				with open(fp, 'wb+') as rtff:
-					for line in f:
-						rtff.write(line)
-				doc = Rtf15Reader.read(open(fp, 'rb'))
-				doctxt = PlaintextWriter.write(doc).getvalue()
-				with open(fp2, 'wb+') as txtf:
-					for line in doctxt:
-						txtf.write(line)
-				f = str(f)[:-4] + ".txt"
-				result = doctxt
-			else:
-				with open(fp2, 'wb+') as txtf:
-					for line in f:
-						txtf.write(line)
-				result = open(fp2, 'r').read()
-		response_dict = generate_term_dict(result)
-		response_dict['fp'] = 'static/data/' + str(f)
-		# with txt search for terms, if found that term is good.
-		#response_dict = {"liq pref, seniority": "senior"}
-		return HttpResponse(simplejson.dumps(response_dict), mimetype='application/javascript')
-	elif request.POST:
-		rating = ""
-		score = custom_POST_to_score(request)
-		if score > 4.5:
-			rating = 'A+'
-		elif score > 4:
-			rating = 'A'
-		elif score > 3.5:
-			rating = 'B+'
-		elif score > 3:
-			rating = 'B'
-		elif score > 2.5:
-			rating = 'C+'
-		elif score > 2:
-			rating = 'C'
-		elif score > 1:
-			rating = 'D'
-		else:
-			rating = 'F'
-		return HttpResponse(rating)
-		#return render_to_response('upload.html', {'score': score, 'terms': TermFields.objects.all().order_by('term'), 'choices': TermChoices.objects.all().order_by('choice_label')}, context_instance = RequestContext(request))
-	else:
-		score = 0
-		return render_to_response('upload.html', {'score': score, 'terms': TermFields.objects.all().order_by('term'), 'choices': TermChoices.objects.all().order_by('choice_label')}, context_instance = RequestContext(request))
-
+#Creates a dict of all of the terms found in the text
 def generate_term_dict(text):
 	text = text.lower()
 	text1 = text.replace(',','').replace(' ','')
@@ -185,113 +110,9 @@ def generate_term_dict(text):
 		b = text.find('times the original purchase price')
 		termdict['liq pref, amount multiple'] = text[a+8:b]
 		termdict['liq pref, amount'] = 'X times the original purchase price'
-	print termdict
 	return termdict
 
-def reset_tables(request):
-	#connection._rollback()
-	term_deets = {
-		"pre-money valuation": {},
-		"amount of the offering": {},
-		"price": {'0-0.6':1, '0.6-0.65':1.5, '0.65-0.7':2, '0.7-0.75':2.5, '0.75-0.8':3, '0.8-0.85':3.5, '0.85-0.9':4, '0.9-0.95':4.5, '0.95-1':5}, 
-		"liq pref, seniority": {"senior":3, "pari passu":5}, #"liq pref, seniority": {"senior":3, "pari passu":4, "junior":5}, 
-		"liq pref, amount": {"original purchase price":3,"X times the original purchase price":1},
-		"liq pref, participating": {"yes":1, "no":5}, 
-		"liq pref, capped": {"yes":3, "no":1}, 
-		"pay-to-play": {"yes":4, "no":3},
-		"employee pool": {"0-5%":3, "5-15%":5, "15-20%":3, ">20%":1},
-		"anti-dilution": {"average":5, "ratchet":1},
-		"anti-dilution, base": {"narrow":1, "broad":5},
-		"board, number": {"1-2":3,"3-8":5,"9-11":3},
-		"board, election": {"investors":1, "split":3, "founders":5},
-		"prot prov, change in terms of equity series": {"no":1, "yes":5},
-		"prot prov, authorize more stock": {"no":1, "yes":5},
-		"prot prov, issue senior stock": {"no":1, "yes":5},
-		"prot prov, buy back common": {"no":1, "yes":5},
-		"prot prov, sell the company": {"no":1, "yes":5},
-		"prot prov, change the cert or bylaws": {"no":1, "yes":5},
-		"prot prov, change the size of the board": {"no":1, "yes":5},
-		"prot prov, pay/Declare a dividend": {"no":1, "yes":5},
-		"prot prov, borrow money": {"no":1, "yes":5},
-		"drag along": {"yes":1, "no":5}, 
-		"conversion, automatic": {"no":1, "yes":5},
-		"conversion, voluntary": {"no":1, "yes":5},
-		"conversion, ratio": {">1:1":1, "1:1":5},
-		"dividends, % of equity": {"12-15%":1, "9-11%":2, "5-9%":3, "1-4%":4, "0%":5},
-		"redemption rights": {"mandatory":1, "investor option":3, "none":5},
-		"registration rights, demand": {"yes":3, "no":5},
-		"registration rights, piggyback": {"yes":3, "no":5},
-		"registration rights, S-3": {"yes":3, "no":5},
-		"right of first refusal": {"yes":3, "no":5},
-		"voting rights, multiple of common stock voting": {">1:1":1, "1:1":5},
-		"co-sale agreement": {"yes":3, "no":5},
-		"vesting": {"5 years":1, "4 years":2, "3 years":3, "1-2 years":4, "0 years":5}
-	}
-	terms_shown = ['liq pref, seniority', 'liq pref, participating',]
-	for term, choices in term_deets.iteritems():
-		try:
-			term_field = TermFields.objects.get(term__iexact = term)
-			term_field.weight = 1.0
-			term_field.save()
-		except:
-			term_field = TermFields.objects.create(term = term, weight = 1.0)
-			term_field.save()
-		for key, value in choices.iteritems():
-			term_field = TermFields.objects.get(term__iexact = term)
-			term_choice = TermChoices.objects.filter(term_field = term_field, choice_label__iexact = key)
-			if len(term_choice) == 0:
-				term_choice = TermChoices.objects.create(term_field = term_field, choice_label = key, value = value)
-			else:
-				term_choice = TermChoices.objects.get(term_field = term_field, choice_label = key)
-				term_choice.value = value
-			term_choice.save()
-	return HttpResponseRedirect('/termsheet/')
-
-def update_term(term, choice, value, weight):
-	try:
-		term_field = TermFields.objects.get(term__iexact = term)
-		term_field.weight = weight
-		term_field = TermFields.objects.get(term__iexact = term)
-		term_choice = TermChoices.objects.filter(term_field = term_field, choice_label__iexact = key)[0]
-		term_choice.value = value
-	except:
-		return -1
-
-def term_dict_to_score(term_dict):
-	score = 0
-	total_weight = 0
-	for k,v in term_dict.iteritems():
-		term_field = TermFields.objects.get(term__iexact = k)
-		term_choice = TermChoices.objects.filter(term_field = term_field, choice_label__iexact = v)[0]
-		weight = term_field.weight
-		value = term_choice.value
-		score = score + weight*value
-		total_weight = total_weight + weight
-	return str("{0:.2f}".format(score/total_weight)) + ('/5')
-
-def POST_to_score(request):
-	term_score = 1
-	term_dict = {}
-	for k,v in request.POST.iteritems():
-		user_input = k.split("+")
-		if user_input[0] == "weight" and v:
-			term = user_input[1]
-			term_field = TermFields.objects.get(term__iexact = term)
-			term_field.weight = v
-			term_field.save()
-		if user_input[0] == "term" and v:
-			term_dict[user_input[1]] = v
-		if user_input[0] == "value" and v:
-			term = user_input[1]
-			choice = user_input[2]
-			term_field = TermFields.objects.get(term__iexact = term)
-			term_choice = TermChoices.objects.filter(term_field = term_field, choice_label__iexact = choice)[0]
-			term_choice.value = v
-			term_choice.save()
-	if len(term_dict) > 0:
-		term_score = term_dict_to_score(term_dict)
-	return term_score
-
+#Converts the terms indicated as being in the document to a score
 def custom_POST_to_score(request):
 	term_score = 0.0
 	total_weight = 0.0
@@ -374,6 +195,7 @@ def custom_POST_to_score(request):
 		return 0
 	return term_score/total_weight
 
+#Converts the text for a number to the integer 
 def text2int(textnum, numwords={}):
     if not numwords:
       units = [
@@ -404,20 +226,193 @@ def text2int(textnum, numwords={}):
 
     return result + current
 
-def index(request):
-	#connection._rollback()
-	term_score = 0
-	if request.POST:
-		term_score = POST_to_score(request)
-	return render_to_response('index.html', {'score': term_score, 'selected': {"liq pref, seniority": "senior"}, 'terms': TermFields.objects.all().order_by('term'), 'choices': TermChoices.objects.all().order_by('choice_label')}, context_instance = RequestContext(request))
+#Where the magic happens - this catches all three parts of the process: uploading, extracting terms from, and grading the document
+@csrf_exempt
+def upload(request):
+	# user uploads a document -> convert into a dict of the terms found
+	if request.FILES:
+		if 'file' in request.FILES:
+			result = ''
+			f = request.FILES['file']
+			fp = 'shake_v3/static/data/' + str(f)
+			fp2 = fp[:len(fp)-3] + 'txt'
+			if fp[len(fp)-3:len(fp)] == 'pdf':
+				with open(fp, 'wb+') as pdff:
+					for chunk in f.chunks():
+						pdff.write(chunk)
+				result = pdf_to_txt(fp)
+				with open(fp2, 'wb+') as txtf:
+					txtf.write(result)			
+			elif fp[len(fp)-3:len(fp)] == 'rtf':
+				with open(fp, 'wb+') as rtff:
+					for line in f:
+						rtff.write(line)
+				doc = Rtf15Reader.read(open(fp, 'rb'))
+				doctxt = PlaintextWriter.write(doc).getvalue()
+				with open(fp2, 'wb+') as txtf:
+					for line in doctxt:
+						txtf.write(line)
+				f = str(f)[:-4] + ".txt"
+				result = doctxt
+			else:
+				with open(fp2, 'wb+') as txtf:
+					for line in f:
+						txtf.write(line)
+				result = open(fp2, 'r').read()
+		response_dict = generate_term_dict(result)
+		response_dict['fp'] = 'static/data/' + str(f)
+		return HttpResponse(simplejson.dumps(response_dict), mimetype='application/javascript')
+	# user indicates terms -> give a grade
+	elif request.POST:
+		#TO DO: implement saving the data
+		rating = ""
+		score = custom_POST_to_score(request)
+		if score > 4.5:
+			rating = 'A+'
+		elif score > 4:
+			rating = 'A'
+		elif score > 3.5:
+			rating = 'B+'
+		elif score > 3:
+			rating = 'B'
+		elif score > 2.5:
+			rating = 'C+'
+		elif score > 2:
+			rating = 'C'
+		elif score > 1:
+			rating = 'D'
+		else:
+			rating = 'F'
+		return HttpResponse(rating)
+	# display the upload part 1
+	else:
+		score = 0
+		return render_to_response('upload.html', {'score': score}, context_instance = RequestContext(request))
 
-def result(request):
-	if request.method == 'POST':
-		form = TermForm(data=request.POST)
-		if form.is_valid():
-			kwargs = form.cleaned_data
-			employeepool = kwargs['employeepool']
-			rating = rate_employee_pool(employeepool)
-			return render_to_response('result.html', {'result': rating})
-	form = TermForm
-	return render_to_response('index.html', {'form': form}, context_instance = RequestContext(request))
+#Functions as if the user uploaded the GoodTermSheet.pdf
+@csrf_exempt
+def demo(request):
+	result = ''
+	result = open('shake_v3/static/data/GoodTermSheet.txt', 'rb+').read()
+	response_dict = generate_term_dict(result)
+	response_dict['fp'] = 'static/data/GoodTermSheet.pdf'
+	return HttpResponse(simplejson.dumps(response_dict), mimetype='application/javascript')
+
+## Everything below this is from the first iteration
+
+# def term_dict_to_score(term_dict):
+# 	score = 0
+# 	total_weight = 0
+# 	for k,v in term_dict.iteritems():
+# 		term_field = TermFields.objects.get(term__iexact = k)
+# 		term_choice = TermChoices.objects.filter(term_field = term_field, choice_label__iexact = v)[0]
+# 		weight = term_field.weight
+# 		value = term_choice.value
+# 		score = score + weight*value
+# 		total_weight = total_weight + weight
+# 	return str("{0:.2f}".format(score/total_weight)) + ('/5')
+# def update_term(term, choice, value, weight):
+# 	try:
+# 		term_field = TermFields.objects.get(term__iexact = term)
+# 		term_field.weight = weight
+# 		term_field = TermFields.objects.get(term__iexact = term)
+# 		term_choice = TermChoices.objects.filter(term_field = term_field, choice_label__iexact = key)[0]
+# 		term_choice.value = value
+# 	except:
+# 		return -1
+# def POST_to_score(request):
+# 	term_score = 1
+# 	term_dict = {}
+# 	for k,v in request.POST.iteritems():
+# 		user_input = k.split("+")
+# 		if user_input[0] == "weight" and v:
+# 			term = user_input[1]
+# 			term_field = TermFields.objects.get(term__iexact = term)
+# 			term_field.weight = v
+# 			term_field.save()
+# 		if user_input[0] == "term" and v:
+# 			term_dict[user_input[1]] = v
+# 		if user_input[0] == "value" and v:
+# 			term = user_input[1]
+# 			choice = user_input[2]
+# 			term_field = TermFields.objects.get(term__iexact = term)
+# 			term_choice = TermChoices.objects.filter(term_field = term_field, choice_label__iexact = choice)[0]
+# 			term_choice.value = v
+# 			term_choice.save()
+# 	if len(term_dict) > 0:
+# 		term_score = term_dict_to_score(term_dict)
+# 	return term_score
+# def index(request):
+# 	term_score = 0
+# 	if request.POST:
+# 		term_score = POST_to_score(request)
+# 	return render_to_response('index.html', {'score': term_score, 'selected': {"liq pref, seniority": "senior"}, 'terms': TermFields.objects.all().order_by('term'), 'choices': TermChoices.objects.all().order_by('choice_label')}, context_instance = RequestContext(request))
+
+# def reset_tables(request):
+# 	term_deets = {
+# 		"pre-money valuation": {},
+# 		"amount of the offering": {},
+# 		"price": {'0-0.6':1, '0.6-0.65':1.5, '0.65-0.7':2, '0.7-0.75':2.5, '0.75-0.8':3, '0.8-0.85':3.5, '0.85-0.9':4, '0.9-0.95':4.5, '0.95-1':5}, 
+# 		"liq pref, seniority": {"senior":3, "pari passu":5}, #"liq pref, seniority": {"senior":3, "pari passu":4, "junior":5}, 
+# 		"liq pref, amount": {"original purchase price":3,"X times the original purchase price":1},
+# 		"liq pref, participating": {"yes":1, "no":5}, 
+# 		"liq pref, capped": {"yes":3, "no":1}, 
+# 		"pay-to-play": {"yes":4, "no":3},
+# 		"employee pool": {"0-5%":3, "5-15%":5, "15-20%":3, ">20%":1},
+# 		"anti-dilution": {"average":5, "ratchet":1},
+# 		"anti-dilution, base": {"narrow":1, "broad":5},
+# 		"board, number": {"1-2":3,"3-8":5,"9-11":3},
+# 		"board, election": {"investors":1, "split":3, "founders":5},
+# 		"prot prov, change in terms of equity series": {"no":1, "yes":5},
+# 		"prot prov, authorize more stock": {"no":1, "yes":5},
+# 		"prot prov, issue senior stock": {"no":1, "yes":5},
+# 		"prot prov, buy back common": {"no":1, "yes":5},
+# 		"prot prov, sell the company": {"no":1, "yes":5},
+# 		"prot prov, change the cert or bylaws": {"no":1, "yes":5},
+# 		"prot prov, change the size of the board": {"no":1, "yes":5},
+# 		"prot prov, pay/Declare a dividend": {"no":1, "yes":5},
+# 		"prot prov, borrow money": {"no":1, "yes":5},
+# 		"drag along": {"yes":1, "no":5}, 
+# 		"conversion, automatic": {"no":1, "yes":5},
+# 		"conversion, voluntary": {"no":1, "yes":5},
+# 		"conversion, ratio": {">1:1":1, "1:1":5},
+# 		"dividends, % of equity": {"12-15%":1, "9-11%":2, "5-9%":3, "1-4%":4, "0%":5},
+# 		"redemption rights": {"mandatory":1, "investor option":3, "none":5},
+# 		"registration rights, demand": {"yes":3, "no":5},
+# 		"registration rights, piggyback": {"yes":3, "no":5},
+# 		"registration rights, S-3": {"yes":3, "no":5},
+# 		"right of first refusal": {"yes":3, "no":5},
+# 		"voting rights, multiple of common stock voting": {">1:1":1, "1:1":5},
+# 		"co-sale agreement": {"yes":3, "no":5},
+# 		"vesting": {"5 years":1, "4 years":2, "3 years":3, "1-2 years":4, "0 years":5}
+# 	}
+# 	terms_shown = ['liq pref, seniority', 'liq pref, participating',]
+# 	for term, choices in term_deets.iteritems():
+# 		try:
+# 			term_field = TermFields.objects.get(term__iexact = term)
+# 			term_field.weight = 1.0
+# 			term_field.save()
+# 		except:
+# 			term_field = TermFields.objects.create(term = term, weight = 1.0)
+# 			term_field.save()
+# 		for key, value in choices.iteritems():
+# 			term_field = TermFields.objects.get(term__iexact = term)
+# 			term_choice = TermChoices.objects.filter(term_field = term_field, choice_label__iexact = key)
+# 			if len(term_choice) == 0:
+# 				term_choice = TermChoices.objects.create(term_field = term_field, choice_label = key, value = value)
+# 			else:
+# 				term_choice = TermChoices.objects.get(term_field = term_field, choice_label = key)
+# 				term_choice.value = value
+# 			term_choice.save()
+# 	return HttpResponseRedirect('/termsheet/')
+
+# def result(request):
+# 	if request.method == 'POST':
+# 		form = TermForm(data=request.POST)
+# 		if form.is_valid():
+# 			kwargs = form.cleaned_data
+# 			employeepool = kwargs['employeepool']
+# 			rating = rate_employee_pool(employeepool)
+# 			return render_to_response('result.html', {'result': rating})
+# 	form = TermForm
+# 	return render_to_response('index.html', {'form': form}, context_instance = RequestContext(request))
